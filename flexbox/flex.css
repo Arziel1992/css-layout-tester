@@ -1,148 +1,193 @@
-* {
-    box-sizing: border-box;
-    font-family: Arial, sans-serif;
-}
+@import '../assets/css/variables.css';
 
-body {
-    margin: 0;
-    padding: 20px;
-    background-color: #f5f5f5;
-}
+/* Flexbox Tester Specific Styles */
 
+/* Layout for the tester page */
 .main-container {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: var(--spacing-lg);
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: var(--spacing-md);
 }
 
-.row {
-    display: flex;
-    gap: 20px;
+.controls-layout {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    gap: var(--spacing-lg);
+    align-items: start;
+}
+
+@media (max-width: 1024px) {
+    .controls-layout {
+        grid-template-columns: 1fr;
+    }
 }
 
 .column {
-    background-color: white;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    background-color: var(--color-white);
+    padding: var(--spacing-md);
+    border-radius: var(--border-radius-base);
+    box-shadow: 0 2px 4px var(--color-shadow);
 }
 
-.left-column,
-.right-column {
-    flex: 1;
-    max-width: 300px;
+h1 {
+    text-align: center;
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-sm);
 }
 
-.middle-column {
-    flex: 2;
-}
+.guide-link {
+    display: block;
+    text-align: center;
+    margin-bottom: var(--spacing-lg);
+    color: var(--color-text-light);
+    text-decoration: underline;
 
-.code-preview {
-    flex: 1;
-    background-color: #f8f8f8;
-    color: #333;
-    padding: 20px;
-    border-radius: 8px;
-    overflow-x: auto;
-    font-family: monospace;
-    position: relative;
-    border: 1px solid #e0e0e0;
-}
-
-.code-preview pre {
-    font-size: 16px;
-    margin: 0;
-    padding: 10px;
+    &:hover {
+        color: var(--color-primary);
+    }
 }
 
 h2 {
+    color: var(--color-primary);
+    border-bottom: 2px solid var(--color-border);
+    padding-bottom: var(--spacing-sm);
     margin-top: 0;
-    color: #333;
-    border-bottom: 2px solid #ddd;
-    padding-bottom: 10px;
 }
 
+/* Controls */
 .control-group {
     margin-bottom: 15px;
+
+    label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+        font-size: 0.9rem;
+        cursor: help;
+    }
+
+    select, input {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid var(--color-border);
+        border-radius: var(--border-radius-sm);
+        font-size: 1rem;
+
+        &:focus {
+            outline: none;
+            border-color: var(--color-primary);
+            box-shadow: 0 0 0 2px rgba(33, 150, 243, 0.2);
+        }
+    }
 }
 
-.control-group h3 {
-    margin-bottom: 10px;
-    font-size: 16px;
-    color: #555;
+.info-icon {
+    font-size: 0.8em;
+    color: var(--color-primary);
+    background-color: rgba(33, 150, 243, 0.1);
+    border-radius: 50%;
+    width: 16px;
+    height: 16px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 4px;
+    cursor: help;
 }
 
-label {
-    display: block;
-    margin-bottom: 5px;
-}
-
-select {
-    width: 100%;
-    padding: 8px;
-    margin-bottom: 10px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-}
-
-/* Flex container preview styles */
+/* Flex Container Preview Area */
 #flex-container {
-    min-height: 300px;
-    border: 2px dashed #2196f3;
-    padding: 10px;
-    margin-bottom: 20px;
+    min-height: 400px;
+    background-color: #e3f2fd;
+    border: 2px dashed #90caf9;
+    border-radius: var(--border-radius-base);
+    margin-bottom: var(--spacing-md);
+    padding: var(--spacing-sm);
+    /* Transition for smooth property changes */
     transition: all 0.3s ease;
 }
 
 .flex-item {
+    background-color: var(--color-primary);
+    color: var(--color-white);
     padding: 20px;
     margin: 5px;
-    background-color: #ff9800;
-    color: white;
     text-align: center;
-    border-radius: 4px;
+    font-weight: bold;
+    border-radius: var(--border-radius-sm);
+    min-width: 60px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    /* Transition for smooth property changes */
     transition: all 0.3s ease;
+
+    /* Make items distinct */
+    &:nth-child(odd) {
+        background-color: var(--color-primary-dark);
+    }
 }
 
-/* Copy button styles */
+/* Actions */
+.actions {
+    display: flex;
+    gap: var(--spacing-sm);
+    justify-content: center;
+
+    button {
+        padding: 8px 16px;
+        background-color: var(--color-text-light);
+        color: var(--color-white);
+        border: none;
+        border-radius: var(--border-radius-sm);
+        cursor: pointer;
+        transition: background-color 0.2s;
+
+        &:hover {
+            background-color: var(--color-text);
+        }
+    }
+}
+
+/* Code Preview */
+.code-preview {
+    background-color: #2d2d2d;
+    color: #f8f8f2;
+    overflow-x: auto;
+
+    h2 {
+        color: #fff;
+        border-bottom-color: #444;
+    }
+}
+
+#css-code {
+    font-family: 'Courier New', monospace;
+    white-space: pre-wrap;
+    line-height: 1.5;
+}
+
+/* Syntax Highlighting Simulators */
+.selector { color: #ff79c6; }
+.property { color: #8be9fd; }
+.value { color: #f1fa8c; }
+.punctuation { color: #f8f8f2; }
+
+/* Copy Button */
 .copy-button {
     position: absolute;
-    top: 10px;
-    right: 10px;
-    padding: 5px 10px;
-    background-color: #4caf50;
+    top: 20px;
+    right: 20px;
+    background-color: rgba(255, 255, 255, 0.1);
     color: white;
-    border: none;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 5px 10px;
     border-radius: 4px;
     cursor: pointer;
-    font-size: 12px;
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    z-index: 10;
-}
+    font-size: 0.8rem;
 
-.copy-button:hover {
-    background-color: #388e3c;
-}
-
-.copy-icon {
-    font-size: 14px;
-}
-
-/* Code highlighting for light theme */
-.property {
-    color: #0000ff;
-}
-
-.value {
-    color: #a31515;
-}
-
-.selector {
-    color: #800000;
-}
-
-.punctuation {
-    color: #000000;
+    &:hover {
+        background-color: rgba(255, 255, 255, 0.2);
+    }
 }
