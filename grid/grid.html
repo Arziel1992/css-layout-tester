@@ -10,16 +10,21 @@
 
 <body>
     <h1>Interactive CSS Grid Tester</h1>
+    <p>
+        <a href="https://css-tricks.com/css-grid-layout-guide/" target="_blank" rel="noopener noreferrer" class="guide-link">
+            Read the Full Guide on CSS-Tricks
+        </a>
+    </p>
 
-    <div class="main-container">
-        <!-- First Row: Controls and Preview -->
-        <div class="row">
-            <!-- Left Column: Parent Properties -->
-            <div class="column left-column">
+    <main class="main-container">
+        <!-- Controls and Preview -->
+        <section class="controls-layout">
+            <!-- Parent Properties -->
+            <aside class="column left-column">
                 <h2>Parent Properties</h2>
 
                 <div class="control-group">
-                    <h3>display</h3>
+                    <label for="display-property" title="Defines the element as a grid container.">display <span class="info-icon">?</span></label>
                     <select id="display-property">
                         <option value="grid">grid</option>
                         <option value="inline-grid">inline-grid</option>
@@ -27,22 +32,37 @@
                 </div>
 
                 <div class="control-group">
-                    <h3>grid-template-columns</h3>
+                    <label for="grid-template-columns" title="Defines the columns of the grid with a space-separated list of values.">grid-template-columns <span class="info-icon">?</span></label>
                     <input type="text" id="grid-template-columns" value="repeat(3, 1fr)" placeholder="e.g., 100px 200px 1fr">
                 </div>
 
                 <div class="control-group">
-                    <h3>grid-template-rows</h3>
+                    <label for="grid-template-rows" title="Defines the rows of the grid with a space-separated list of values.">grid-template-rows <span class="info-icon">?</span></label>
                     <input type="text" id="grid-template-rows" value="repeat(3, 100px)" placeholder="e.g., 100px auto 1fr">
                 </div>
 
                 <div class="control-group">
-                    <h3>grid-gap</h3>
+                    <label for="grid-template-areas" title="Defines a grid template by referencing the names of the grid areas.">grid-template-areas <span class="info-icon">?</span></label>
+                    <textarea id="grid-template-areas" placeholder='e.g., "header header header" "main main sidebar"' rows="3"></textarea>
+                </div>
+
+                <div class="control-group">
+                    <label for="grid-gap" title="Legacy shorthand for row-gap and column-gap.">grid-gap (legacy) <span class="info-icon">?</span></label>
                     <input type="text" id="grid-gap" value="10px" placeholder="e.g., 10px">
                 </div>
 
                 <div class="control-group">
-                    <h3>justify-items</h3>
+                    <label for="row-gap" title="Sets the size of the gap (gutter) between the grid's rows.">row-gap <span class="info-icon">?</span></label>
+                    <input type="text" id="row-gap" placeholder="e.g., 20px">
+                </div>
+
+                <div class="control-group">
+                    <label for="column-gap" title="Sets the size of the gap (gutter) between the grid's columns.">column-gap <span class="info-icon">?</span></label>
+                    <input type="text" id="column-gap" placeholder="e.g., 20px">
+                </div>
+
+                <div class="control-group">
+                    <label for="justify-items" title="Aligns grid items along the inline (row) axis.">justify-items <span class="info-icon">?</span></label>
                     <select id="justify-items">
                         <option value="stretch">stretch</option>
                         <option value="start">start</option>
@@ -52,7 +72,7 @@
                 </div>
 
                 <div class="control-group">
-                    <h3>align-items</h3>
+                    <label for="align-items" title="Aligns grid items along the block (column) axis.">align-items <span class="info-icon">?</span></label>
                     <select id="align-items">
                         <option value="stretch">stretch</option>
                         <option value="start">start</option>
@@ -62,7 +82,12 @@
                 </div>
 
                 <div class="control-group">
-                    <h3>justify-content</h3>
+                    <label for="place-items" title="Sets both the align-items and justify-items properties in a single declaration.">place-items <span class="info-icon">?</span></label>
+                    <input type="text" id="place-items" placeholder="e.g., center start">
+                </div>
+
+                <div class="control-group">
+                    <label for="justify-content" title="Aligns the grid along the inline (row) axis.">justify-content <span class="info-icon">?</span></label>
                     <select id="justify-content">
                         <option value="start">start</option>
                         <option value="end">end</option>
@@ -74,7 +99,7 @@
                 </div>
 
                 <div class="control-group">
-                    <h3>align-content</h3>
+                    <label for="align-content" title="Aligns the grid along the block (column) axis.">align-content <span class="info-icon">?</span></label>
                     <select id="align-content">
                         <option value="start">start</option>
                         <option value="end">end</option>
@@ -87,7 +112,12 @@
                 </div>
 
                 <div class="control-group">
-                    <h3>grid-auto-flow</h3>
+                    <label for="place-content" title="Sets both the align-content and justify-content properties in a single declaration.">place-content <span class="info-icon">?</span></label>
+                    <input type="text" id="place-content" placeholder="e.g., center space-between">
+                </div>
+
+                <div class="control-group">
+                    <label for="grid-auto-flow" title="Controls how the auto-placement algorithm works.">grid-auto-flow <span class="info-icon">?</span></label>
                     <select id="grid-auto-flow">
                         <option value="row">row</option>
                         <option value="column">column</option>
@@ -95,10 +125,10 @@
                         <option value="column dense">column dense</option>
                     </select>
                 </div>
-            </div>
+            </aside>
 
-            <!-- Middle Column: Grid Container Preview -->
-            <div class="column middle-column">
+            <!-- Grid Container Preview -->
+            <section class="column middle-column">
                 <h2>Grid Container Preview</h2>
                 <div class="button-group">
                     <button id="add-item">Add Item</button>
@@ -115,22 +145,22 @@
                     <div class="grid-item" id="item8">Item 8</div>
                     <div class="grid-item" id="item9">Item 9</div>
                 </div>
-                <div>
-                    <p><strong>Tip:</strong> Try different grid layouts like:</p>
+                <article class="tips">
+                    <p><strong>Tips:</strong></p>
                     <ul>
                         <li><code>repeat(3, 1fr)</code> - Three equal columns</li>
                         <li><code>1fr 2fr 1fr</code> - Middle column twice as wide</li>
                         <li><code>minmax(100px, 1fr) repeat(2, 1fr)</code> - First column with min width</li>
                     </ul>
-                </div>
-            </div>
+                </article>
+            </section>
 
-            <!-- Right Column: Child Properties -->
-            <div class="column right-column">
+            <!-- Child Properties -->
+            <aside class="column right-column">
                 <h2>Child Properties</h2>
 
                 <div class="control-group">
-                    <h3>Select Item</h3>
+                    <label for="item-select">Select Item</label>
                     <select id="item-select">
                         <option value="item1">Item 1</option>
                         <option value="item2">Item 2</option>
@@ -145,17 +175,17 @@
                 </div>
 
                 <div class="control-group">
-                    <h3>grid-column</h3>
+                    <label for="grid-column" title="Determines a grid item's location within the grid columns.">grid-column <span class="info-icon">?</span></label>
                     <input type="text" id="grid-column" value="auto" placeholder="e.g., 1 / 3 or span 2">
                 </div>
 
                 <div class="control-group">
-                    <h3>grid-row</h3>
+                    <label for="grid-row" title="Determines a grid item's location within the grid rows.">grid-row <span class="info-icon">?</span></label>
                     <input type="text" id="grid-row" value="auto" placeholder="e.g., 1 / 3 or span 2">
                 </div>
 
                 <div class="control-group">
-                    <h3>justify-self</h3>
+                    <label for="justify-self" title="Aligns a grid item inside a cell along the inline (row) axis.">justify-self <span class="info-icon">?</span></label>
                     <select id="justify-self">
                         <option value="auto">auto</option>
                         <option value="start">start</option>
@@ -166,7 +196,7 @@
                 </div>
 
                 <div class="control-group">
-                    <h3>align-self</h3>
+                    <label for="align-self" title="Aligns a grid item inside a cell along the block (column) axis.">align-self <span class="info-icon">?</span></label>
                     <select id="align-self">
                         <option value="auto">auto</option>
                         <option value="start">start</option>
@@ -177,12 +207,17 @@
                 </div>
 
                 <div class="control-group">
-                    <h3>grid-area</h3>
+                    <label for="place-self" title="Sets both the align-self and justify-self properties.">place-self <span class="info-icon">?</span></label>
+                    <input type="text" id="place-self" placeholder="e.g., center stretch">
+                </div>
+
+                <div class="control-group">
+                    <label for="grid-area" title="Gives an item a name so that it can be referenced by a template.">grid-area <span class="info-icon">?</span></label>
                     <input type="text" id="grid-area" value="" placeholder="e.g., header or 1 / 1 / 3 / 4">
                 </div>
 
                 <div class="control-group">
-                    <h3>order</h3>
+                    <label for="order" title="Controls the visual order of the item.">order <span class="info-icon">?</span></label>
                     <select id="order">
                         <option value="0">0</option>
                         <option value="1">1</option>
@@ -190,17 +225,17 @@
                         <option value="-1">-1</option>
                     </select>
                 </div>
-            </div>
-        </div>
+            </aside>
+        </section>
 
-        <!-- Second Row: Code Preview -->
-        <div class="column code-preview">
+        <!-- Code Preview -->
+        <section class="column code-preview">
             <h2>CSS Code</h2>
             <pre id="css-code"></pre>
-        </div>
-    </div>
+        </section>
+    </main>
 
-    <script src="grid.js"></script>
+    <script type="module" src="grid.js"></script>
 </body>
 
 </html>

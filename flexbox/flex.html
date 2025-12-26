@@ -10,16 +10,21 @@
 
 <body>
     <h1>Interactive Flexbox Tester</h1>
+    <p>
+        <a href="https://css-tricks.com/snippets/css/a-guide-to-flexbox/" target="_blank" rel="noopener noreferrer" class="guide-link">
+            Read the Full Guide on CSS-Tricks
+        </a>
+    </p>
 
-    <div class="main-container">
-        <!-- First Row: Controls and Preview -->
-        <div class="row">
-            <!-- Left Column: Parent Properties -->
-            <div class="column left-column">
+    <main class="main-container">
+        <!-- Controls and Preview -->
+        <section class="controls-layout">
+            <!-- Parent Properties -->
+            <aside class="column left-column">
                 <h2>Parent Properties</h2>
 
                 <div class="control-group">
-                    <h3>display</h3>
+                    <label for="display-property" title="Defines a flex container; inline or block depending on the given value.">display <span class="info-icon">?</span></label>
                     <select id="display-property">
                         <option value="flex">flex</option>
                         <option value="inline-flex">inline-flex</option>
@@ -27,7 +32,7 @@
                 </div>
 
                 <div class="control-group">
-                    <h3>flex-direction</h3>
+                    <label for="flex-direction" title="Establishes the main-axis, thus defining the direction flex items are placed in the flex container.">flex-direction <span class="info-icon">?</span></label>
                     <select id="flex-direction">
                         <option value="row">row</option>
                         <option value="row-reverse">row-reverse</option>
@@ -37,7 +42,7 @@
                 </div>
 
                 <div class="control-group">
-                    <h3>flex-wrap</h3>
+                    <label for="flex-wrap" title="By default, flex items will all try to fit onto one line. You can change that and allow the items to wrap as needed with this property.">flex-wrap <span class="info-icon">?</span></label>
                     <select id="flex-wrap">
                         <option value="nowrap">nowrap</option>
                         <option value="wrap">wrap</option>
@@ -46,7 +51,12 @@
                 </div>
 
                 <div class="control-group">
-                    <h3>justify-content</h3>
+                    <label for="flex-flow" title="This is a shorthand for the flex-direction and flex-wrap properties.">flex-flow <span class="info-icon">?</span></label>
+                    <input type="text" id="flex-flow" placeholder="e.g. row wrap" disabled title="Currently set via direction and wrap controls">
+                </div>
+
+                <div class="control-group">
+                    <label for="justify-content" title="This defines the alignment along the main axis.">justify-content <span class="info-icon">?</span></label>
                     <select id="justify-content">
                         <option value="flex-start">flex-start</option>
                         <option value="flex-end">flex-end</option>
@@ -54,22 +64,30 @@
                         <option value="space-between">space-between</option>
                         <option value="space-around">space-around</option>
                         <option value="space-evenly">space-evenly</option>
+                        <option value="start">start</option>
+                        <option value="end">end</option>
+                        <option value="left">left</option>
+                        <option value="right">right</option>
                     </select>
                 </div>
 
                 <div class="control-group">
-                    <h3>align-items</h3>
+                    <label for="align-items" title="This defines the default behavior for how flex items are laid out along the cross axis on the current line.">align-items <span class="info-icon">?</span></label>
                     <select id="align-items">
                         <option value="stretch">stretch</option>
                         <option value="flex-start">flex-start</option>
                         <option value="flex-end">flex-end</option>
                         <option value="center">center</option>
                         <option value="baseline">baseline</option>
+                        <option value="start">start</option>
+                        <option value="end">end</option>
+                        <option value="self-start">self-start</option>
+                        <option value="self-end">self-end</option>
                     </select>
                 </div>
 
                 <div class="control-group">
-                    <h3>align-content</h3>
+                    <label for="align-content" title="This aligns a flex container's lines within when there is extra space in the cross-axis.">align-content <span class="info-icon">?</span></label>
                     <select id="align-content">
                         <option value="normal">normal</option>
                         <option value="flex-start">flex-start</option>
@@ -79,23 +97,31 @@
                         <option value="space-around">space-around</option>
                         <option value="space-evenly">space-evenly</option>
                         <option value="stretch">stretch</option>
+                        <option value="start">start</option>
+                        <option value="end">end</option>
                     </select>
                 </div>
 
                 <div class="control-group">
-                    <h3>gap</h3>
+                    <label for="place-content" title="Shorthand for align-content and justify-content.">place-content <span class="info-icon">?</span></label>
+                    <input type="text" id="place-content" placeholder="e.g. center start">
+                </div>
+
+                <div class="control-group">
+                    <label for="gap" title="The gap property explicitly controls the space between flex items.">gap <span class="info-icon">?</span></label>
                     <select id="gap">
                         <option value="0">0</option>
                         <option value="5px">5px</option>
                         <option value="10px">10px</option>
                         <option value="20px">20px</option>
                         <option value="30px">30px</option>
+                        <option value="1rem">1rem</option>
                     </select>
                 </div>
-            </div>
+            </aside>
 
-            <!-- Middle Column: Flex Container Preview -->
-            <div class="column middle-column">
+            <!-- Flex Container Preview -->
+            <section class="column middle-column">
                 <h2>Flex Container Preview</h2>
                 <div id="flex-container">
                     <div class="flex-item" id="item1">Item 1</div>
@@ -104,16 +130,18 @@
                     <div class="flex-item" id="item4">Item 4</div>
                     <div class="flex-item" id="item5">Item 5</div>
                 </div>
-                <button id="add-item">Add Item</button>
-                <button id="remove-item">Remove Item</button>
-            </div>
+                <div class="actions">
+                    <button id="add-item">Add Item</button>
+                    <button id="remove-item">Remove Item</button>
+                </div>
+            </section>
 
-            <!-- Right Column: Child Properties -->
-            <div class="column right-column">
+            <!-- Child Properties -->
+            <aside class="column right-column">
                 <h2>Child Properties</h2>
 
                 <div class="control-group">
-                    <h3>Select Item</h3>
+                    <label for="item-select">Select Item</label>
                     <select id="item-select">
                         <option value="item1">Item 1</option>
                         <option value="item2">Item 2</option>
@@ -124,51 +152,37 @@
                 </div>
 
                 <div class="control-group">
-                    <h3>order</h3>
-                    <select id="order">
-                        <option value="0">0</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                        <option value="-1">-1</option>
-                    </select>
+                    <label for="order" title="Controls the order in which they appear in the flex container.">order <span class="info-icon">?</span></label>
+                    <input type="number" id="order" value="0">
                 </div>
 
                 <div class="control-group">
-                    <h3>flex-grow</h3>
-                    <select id="flex-grow">
-                        <option value="0">0</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                    </select>
+                    <label for="flex-grow" title="Defines the ability for a flex item to grow if necessary.">flex-grow <span class="info-icon">?</span></label>
+                    <input type="number" id="flex-grow" value="0" min="0">
                 </div>
 
                 <div class="control-group">
-                    <h3>flex-shrink</h3>
-                    <select id="flex-shrink">
-                        <option value="1">1</option>
-                        <option value="0">0</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                    </select>
+                    <label for="flex-shrink" title="Defines the ability for a flex item to shrink if necessary.">flex-shrink <span class="info-icon">?</span></label>
+                    <input type="number" id="flex-shrink" value="1" min="0">
                 </div>
 
                 <div class="control-group">
-                    <h3>flex-basis</h3>
+                    <label for="flex-basis" title="Defines the default size of an element before the remaining space is distributed.">flex-basis <span class="info-icon">?</span></label>
                     <select id="flex-basis">
                         <option value="auto">auto</option>
                         <option value="0">0</option>
                         <option value="100px">100px</option>
                         <option value="200px">200px</option>
                         <option value="50%">50%</option>
+                        <option value="content">content</option>
+                        <option value="min-content">min-content</option>
+                        <option value="max-content">max-content</option>
+                        <option value="fit-content">fit-content</option>
                     </select>
                 </div>
 
                 <div class="control-group">
-                    <h3>align-self</h3>
+                    <label for="align-self" title="Allows the default alignment to be overridden for individual flex items.">align-self <span class="info-icon">?</span></label>
                     <select id="align-self">
                         <option value="auto">auto</option>
                         <option value="flex-start">flex-start</option>
@@ -178,17 +192,17 @@
                         <option value="stretch">stretch</option>
                     </select>
                 </div>
-            </div>
-        </div>
+            </aside>
+        </section>
 
-        <!-- Second Row: Code Preview -->
-        <div class="column code-preview">
+        <!-- Code Preview -->
+        <section class="column code-preview">
             <h2>CSS Code</h2>
             <pre id="css-code"></pre>
-        </div>
-    </div>
+        </section>
+    </main>
 
-    <script src="flex.js"></script>
+    <script type="module" src="flex.js"></script>
 </body>
 
 </html>
