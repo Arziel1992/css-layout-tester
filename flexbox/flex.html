@@ -4,36 +4,197 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flexbox Interactive Tester</title>
-    <link rel="stylesheet" href="flex.css">
+    <title>Flexbox Interactive Tester - CSS Layout Tester</title>
+    <meta name="description" content="Interactive Flexbox tester with real-time preview. Learn CSS Flexbox by experimenting with all flex properties.">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    <!-- Tailwind v4 CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#e6f7e6',
+                            100: '#ccefcc',
+                            200: '#99df99',
+                            300: '#66cf66',
+                            400: '#33bf33',
+                            500: '#028f00',
+                            600: '#027200',
+                            700: '#015500',
+                            800: '#013800',
+                            900: '#001b00',
+                            950: '#000e00'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Flowbite -->
+    <link href="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.css" rel="stylesheet">
+
+    <style>
+        /* Preview container */
+        #flex-container {
+            min-height: 400px;
+            background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+            border: 2px dashed #86efac;
+            border-radius: 12px;
+            padding: 16px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .flex-item {
+            background: linear-gradient(135deg, #028f00 0%, #027200 100%);
+            color: white;
+            padding: 20px 24px;
+            text-align: center;
+            font-weight: 600;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px -1px rgba(2, 143, 0, 0.2);
+            transition: all 0.2s ease;
+            min-width: 80px;
+        }
+
+        .flex-item:nth-child(odd) {
+            background: linear-gradient(135deg, #027200 0%, #015500 100%);
+        }
+
+        .flex-item:nth-child(3n) {
+            background: linear-gradient(135deg, #015500 0%, #013800 100%);
+        }
+
+        .flex-item.selected {
+            outline: 3px solid #fbbf24;
+            outline-offset: 2px;
+        }
+
+        /* Code block */
+        .code-block {
+            background: #1e293b;
+            color: #e2e8f0;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 13px;
+            line-height: 1.6;
+            padding: 16px;
+            border-radius: 8px;
+            overflow-x: auto;
+            white-space: pre-wrap;
+        }
+
+        .code-block .property {
+            color: #7dd3fc;
+        }
+
+        .code-block .value {
+            color: #fde047;
+        }
+
+        .code-block .selector {
+            color: #f472b6;
+        }
+
+        .code-block .tag {
+            color: #f472b6;
+        }
+
+        .code-block .attr {
+            color: #7dd3fc;
+        }
+
+        .code-block .string {
+            color: #86efac;
+        }
+    </style>
 </head>
 
-<body>
-    <h1>Interactive Flexbox Tester</h1>
-    <p>
-        <a href="https://css-tricks.com/snippets/css/a-guide-to-flexbox/" target="_blank" rel="noopener noreferrer" class="guide-link">
-            Read the Full Guide on CSS-Tricks
-        </a>
-    </p>
+<body class="bg-gray-50 min-h-screen">
+    <!-- Navigation (matching homepage) -->
+    <nav class="bg-white border-b border-gray-200 fixed w-full z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center gap-3">
+                    <a href="../index.html" class="flex items-center gap-3">
+                        <img src="../assets/logo.svg" alt="CSS Layout Tester" class="h-8 w-8">
+                        <span class="font-semibold text-gray-900 text-lg">CSS Layout Tester</span>
+                    </a>
+                </div>
 
-    <main class="main-container">
-        <!-- Controls and Preview -->
-        <section class="controls-layout">
-            <!-- Parent Properties -->
-            <aside class="column left-column">
-                <h2>Parent Properties</h2>
+                <div class="flex items-center gap-4">
+                    <a href="flex.html" class="text-primary-600 font-medium">Flexbox Tester</a>
+                    <a href="../grid/grid.html" class="text-gray-600 hover:text-primary-600 font-medium transition-colors">Grid Tester</a>
 
-                <div class="control-group">
-                    <label for="display-property" title="Defines a flex container; inline or block depending on the given value.">display <span class="info-icon">?</span></label>
-                    <select id="display-property">
+                    <!-- Language Dropdown -->
+                    <button id="lang-dropdown-btn" data-dropdown-toggle="lang-dropdown" class="flex items-center gap-2 px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100 rounded-lg transition-colors">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"></path>
+                        </svg>
+                        <span id="current-lang">EN</span>
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </button>
+                    <div id="lang-dropdown" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow-lg w-32">
+                        <ul class="py-2 text-sm text-gray-700">
+                            <li><button onclick="setLanguage('en')" class="w-full text-left px-4 py-2 hover:bg-gray-100">English</button></li>
+                            <li><button onclick="setLanguage('es')" class="w-full text-left px-4 py-2 hover:bg-gray-100">Español</button></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="pt-24 pb-12 px-4 max-w-[1600px] mx-auto">
+        <!-- Main Layout -->
+        <div class="grid grid-cols-1 xl:grid-cols-[300px_1fr_280px] gap-6">
+            <!-- Left Column: Parent Properties -->
+            <aside class="bg-white rounded-xl shadow-sm border border-gray-200 p-5 h-fit max-h-[calc(100vh-120px)] overflow-y-auto">
+                <h2 class="text-lg font-semibold text-gray-900 mb-4 pb-3 border-b border-gray-200">Parent Properties</h2>
+
+                <!-- display -->
+                <div class="mb-4">
+                    <div class="flex items-center gap-2 mb-2">
+                        <label class="text-sm font-medium text-gray-700">display</label>
+                        <button onclick="openModal('display')" class="text-primary-600 hover:text-primary-700">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                        </button>
+                    </div>
+                    <select id="display-property" class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-primary-500">
                         <option value="flex">flex</option>
                         <option value="inline-flex">inline-flex</option>
                     </select>
                 </div>
 
-                <div class="control-group">
-                    <label for="flex-direction" title="Establishes the main-axis, thus defining the direction flex items are placed in the flex container.">flex-direction <span class="info-icon">?</span></label>
-                    <select id="flex-direction">
+                <!-- flex-direction -->
+                <div class="mb-4">
+                    <div class="flex items-center gap-2 mb-2">
+                        <label class="text-sm font-medium text-gray-700">flex-direction</label>
+                        <button onclick="openModal('flex-direction')" class="text-primary-600 hover:text-primary-700">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                        </button>
+                    </div>
+                    <select id="flex-direction" class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-primary-500">
                         <option value="row">row</option>
                         <option value="row-reverse">row-reverse</option>
                         <option value="column">column</option>
@@ -41,88 +202,116 @@
                     </select>
                 </div>
 
-                <div class="control-group">
-                    <label for="flex-wrap" title="By default, flex items will all try to fit onto one line. You can change that and allow the items to wrap as needed with this property.">flex-wrap <span class="info-icon">?</span></label>
-                    <select id="flex-wrap">
+                <!-- flex-wrap -->
+                <div class="mb-4">
+                    <div class="flex items-center gap-2 mb-2">
+                        <label class="text-sm font-medium text-gray-700">flex-wrap</label>
+                        <button onclick="openModal('flex-wrap')" class="text-primary-600 hover:text-primary-700">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                        </button>
+                    </div>
+                    <select id="flex-wrap" class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-primary-500">
                         <option value="nowrap">nowrap</option>
                         <option value="wrap">wrap</option>
                         <option value="wrap-reverse">wrap-reverse</option>
                     </select>
                 </div>
 
-                <div class="control-group">
-                    <label for="flex-flow" title="This is a shorthand for the flex-direction and flex-wrap properties.">flex-flow <span class="info-icon">?</span></label>
-                    <input type="text" id="flex-flow" placeholder="e.g. row wrap" disabled title="Currently set via direction and wrap controls">
-                </div>
-
-                <div class="control-group">
-                    <label for="justify-content" title="This defines the alignment along the main axis.">justify-content <span class="info-icon">?</span></label>
-                    <select id="justify-content">
+                <!-- justify-content -->
+                <div class="mb-4">
+                    <div class="flex items-center gap-2 mb-2">
+                        <label class="text-sm font-medium text-gray-700">justify-content</label>
+                        <button onclick="openModal('justify-content')" class="text-primary-600 hover:text-primary-700">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                        </button>
+                    </div>
+                    <select id="justify-content" class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-primary-500">
                         <option value="flex-start">flex-start</option>
                         <option value="flex-end">flex-end</option>
                         <option value="center">center</option>
                         <option value="space-between">space-between</option>
                         <option value="space-around">space-around</option>
                         <option value="space-evenly">space-evenly</option>
-                        <option value="start">start</option>
-                        <option value="end">end</option>
-                        <option value="left">left</option>
-                        <option value="right">right</option>
                     </select>
                 </div>
 
-                <div class="control-group">
-                    <label for="align-items" title="This defines the default behavior for how flex items are laid out along the cross axis on the current line.">align-items <span class="info-icon">?</span></label>
-                    <select id="align-items">
+                <!-- align-items -->
+                <div class="mb-4">
+                    <div class="flex items-center gap-2 mb-2">
+                        <label class="text-sm font-medium text-gray-700">align-items</label>
+                        <button onclick="openModal('align-items')" class="text-primary-600 hover:text-primary-700">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                        </button>
+                    </div>
+                    <select id="align-items" class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-primary-500">
                         <option value="stretch">stretch</option>
                         <option value="flex-start">flex-start</option>
                         <option value="flex-end">flex-end</option>
                         <option value="center">center</option>
                         <option value="baseline">baseline</option>
-                        <option value="start">start</option>
-                        <option value="end">end</option>
-                        <option value="self-start">self-start</option>
-                        <option value="self-end">self-end</option>
                     </select>
                 </div>
 
-                <div class="control-group">
-                    <label for="align-content" title="This aligns a flex container's lines within when there is extra space in the cross-axis.">align-content <span class="info-icon">?</span></label>
-                    <select id="align-content">
+                <!-- align-content -->
+                <div class="mb-4">
+                    <div class="flex items-center gap-2 mb-2">
+                        <label class="text-sm font-medium text-gray-700">align-content</label>
+                        <button onclick="openModal('align-content')" class="text-primary-600 hover:text-primary-700">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                        </button>
+                    </div>
+                    <select id="align-content" class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-primary-500">
                         <option value="normal">normal</option>
                         <option value="flex-start">flex-start</option>
                         <option value="flex-end">flex-end</option>
                         <option value="center">center</option>
                         <option value="space-between">space-between</option>
                         <option value="space-around">space-around</option>
-                        <option value="space-evenly">space-evenly</option>
                         <option value="stretch">stretch</option>
-                        <option value="start">start</option>
-                        <option value="end">end</option>
                     </select>
                 </div>
 
-                <div class="control-group">
-                    <label for="place-content" title="Shorthand for align-content and justify-content.">place-content <span class="info-icon">?</span></label>
-                    <input type="text" id="place-content" placeholder="e.g. center start">
+                <!-- row-gap -->
+                <div class="mb-4">
+                    <div class="flex items-center gap-2 mb-2">
+                        <label class="text-sm font-medium text-gray-700">row-gap</label>
+                        <button onclick="openModal('row-gap')" class="text-primary-600 hover:text-primary-700">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                        </button>
+                    </div>
+                    <input type="text" id="row-gap" value="0" class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm font-mono focus:ring-2 focus:ring-primary-500" placeholder="0 | 10px | 1rem">
                 </div>
 
-                <div class="control-group">
-                    <label for="gap" title="The gap property explicitly controls the space between flex items.">gap <span class="info-icon">?</span></label>
-                    <select id="gap">
-                        <option value="0">0</option>
-                        <option value="5px">5px</option>
-                        <option value="10px">10px</option>
-                        <option value="20px">20px</option>
-                        <option value="30px">30px</option>
-                        <option value="1rem">1rem</option>
-                    </select>
+                <!-- column-gap -->
+                <div class="mb-4">
+                    <div class="flex items-center gap-2 mb-2">
+                        <label class="text-sm font-medium text-gray-700">column-gap</label>
+                        <button onclick="openModal('column-gap')" class="text-primary-600 hover:text-primary-700">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                        </button>
+                    </div>
+                    <input type="text" id="column-gap" value="0" class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm font-mono focus:ring-2 focus:ring-primary-500" placeholder="0 | 10px | 1rem">
                 </div>
             </aside>
 
-            <!-- Flex Container Preview -->
-            <section class="column middle-column">
-                <h2>Flex Container Preview</h2>
+            <!-- Middle Column: Preview -->
+            <section class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+                <div class="flex items-center justify-between mb-4">
+                    <h2 class="text-lg font-semibold text-gray-900">Flex Container Preview</h2>
+                </div>
+
                 <div id="flex-container">
                     <div class="flex-item" id="item1">Item 1</div>
                     <div class="flex-item" id="item2">Item 2</div>
@@ -130,19 +319,20 @@
                     <div class="flex-item" id="item4">Item 4</div>
                     <div class="flex-item" id="item5">Item 5</div>
                 </div>
-                <div class="actions">
-                    <button id="add-item">Add Item</button>
-                    <button id="remove-item">Remove Item</button>
+
+                <div class="flex items-center justify-center gap-3 mt-4">
+                    <button id="add-item" class="px-4 py-2 bg-primary-600 hover:bg-primary-700 text-white font-medium rounded-lg transition-colors">Add Item</button>
+                    <button id="remove-item" class="px-4 py-2 bg-gray-200 hover:bg-gray-300 text-gray-700 font-medium rounded-lg transition-colors">Remove Item</button>
                 </div>
             </section>
 
-            <!-- Child Properties -->
-            <aside class="column right-column">
-                <h2>Child Properties</h2>
+            <!-- Right Column: Child Properties -->
+            <aside class="bg-white rounded-xl shadow-sm border border-gray-200 p-5 h-fit">
+                <h2 class="text-lg font-semibold text-gray-900 mb-4 pb-3 border-b border-gray-200">Child Properties</h2>
 
-                <div class="control-group">
-                    <label for="item-select">Select Item</label>
-                    <select id="item-select">
+                <div class="mb-4">
+                    <label class="block mb-2 text-sm font-medium text-gray-700">Select Item</label>
+                    <select id="item-select" class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-primary-500">
                         <option value="item1">Item 1</option>
                         <option value="item2">Item 2</option>
                         <option value="item3">Item 3</option>
@@ -151,39 +341,69 @@
                     </select>
                 </div>
 
-                <div class="control-group">
-                    <label for="order" title="Controls the order in which they appear in the flex container.">order <span class="info-icon">?</span></label>
-                    <input type="number" id="order" value="0">
+                <!-- order -->
+                <div class="mb-4">
+                    <div class="flex items-center gap-2 mb-2">
+                        <label class="text-sm font-medium text-gray-700">order</label>
+                        <button onclick="openModal('order')" class="text-primary-600 hover:text-primary-700">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                        </button>
+                    </div>
+                    <input type="text" id="order" value="0" class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm font-mono focus:ring-2 focus:ring-primary-500" placeholder="0 | 1 | -1">
                 </div>
 
-                <div class="control-group">
-                    <label for="flex-grow" title="Defines the ability for a flex item to grow if necessary.">flex-grow <span class="info-icon">?</span></label>
-                    <input type="number" id="flex-grow" value="0" min="0">
+                <!-- flex-grow -->
+                <div class="mb-4">
+                    <div class="flex items-center gap-2 mb-2">
+                        <label class="text-sm font-medium text-gray-700">flex-grow</label>
+                        <button onclick="openModal('flex-grow')" class="text-primary-600 hover:text-primary-700">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                        </button>
+                    </div>
+                    <input type="text" id="flex-grow" value="0" class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm font-mono focus:ring-2 focus:ring-primary-500" placeholder="0 | 1 | 2">
                 </div>
 
-                <div class="control-group">
-                    <label for="flex-shrink" title="Defines the ability for a flex item to shrink if necessary.">flex-shrink <span class="info-icon">?</span></label>
-                    <input type="number" id="flex-shrink" value="1" min="0">
+                <!-- flex-shrink -->
+                <div class="mb-4">
+                    <div class="flex items-center gap-2 mb-2">
+                        <label class="text-sm font-medium text-gray-700">flex-shrink</label>
+                        <button onclick="openModal('flex-shrink')" class="text-primary-600 hover:text-primary-700">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                        </button>
+                    </div>
+                    <input type="text" id="flex-shrink" value="1" class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm font-mono focus:ring-2 focus:ring-primary-500" placeholder="0 | 1">
                 </div>
 
-                <div class="control-group">
-                    <label for="flex-basis" title="Defines the default size of an element before the remaining space is distributed.">flex-basis <span class="info-icon">?</span></label>
-                    <select id="flex-basis">
-                        <option value="auto">auto</option>
-                        <option value="0">0</option>
-                        <option value="100px">100px</option>
-                        <option value="200px">200px</option>
-                        <option value="50%">50%</option>
-                        <option value="content">content</option>
-                        <option value="min-content">min-content</option>
-                        <option value="max-content">max-content</option>
-                        <option value="fit-content">fit-content</option>
-                    </select>
+                <!-- flex-basis -->
+                <div class="mb-4">
+                    <div class="flex items-center gap-2 mb-2">
+                        <label class="text-sm font-medium text-gray-700">flex-basis</label>
+                        <button onclick="openModal('flex-basis')" class="text-primary-600 hover:text-primary-700">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                        </button>
+                    </div>
+                    <input type="text" id="flex-basis" value="auto" class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm font-mono focus:ring-2 focus:ring-primary-500" placeholder="auto | 100px | 50%">
                 </div>
 
-                <div class="control-group">
-                    <label for="align-self" title="Allows the default alignment to be overridden for individual flex items.">align-self <span class="info-icon">?</span></label>
-                    <select id="align-self">
+                <!-- align-self -->
+                <div class="mb-4">
+                    <div class="flex items-center gap-2 mb-2">
+                        <label class="text-sm font-medium text-gray-700">align-self</label>
+                        <button onclick="openModal('align-self')" class="text-primary-600 hover:text-primary-700">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                        </button>
+                    </div>
+                    <select id="align-self" class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-primary-500">
                         <option value="auto">auto</option>
                         <option value="flex-start">flex-start</option>
                         <option value="flex-end">flex-end</option>
@@ -193,16 +413,351 @@
                     </select>
                 </div>
             </aside>
-        </section>
+        </div>
 
         <!-- Code Preview -->
-        <section class="column code-preview">
-            <h2>CSS Code</h2>
-            <pre id="css-code"></pre>
+        <section class="mt-6 bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+            <div class="flex items-center justify-between px-6 py-4 border-b border-gray-200">
+                <h2 class="text-lg font-semibold text-gray-900">Generated Code</h2>
+                <div class="flex gap-2">
+                    <button id="tab-css" class="px-4 py-1.5 text-sm font-medium bg-primary-100 text-primary-700 rounded-lg">CSS</button>
+                    <button id="tab-html" class="px-4 py-1.5 text-sm font-medium text-gray-600 hover:bg-gray-100 rounded-lg">HTML</button>
+                </div>
+            </div>
+            <div class="relative">
+                <button id="copy-btn" class="absolute top-4 right-4 px-3 py-1.5 text-xs font-medium text-gray-300 bg-gray-800 hover:bg-gray-700 rounded border border-gray-700 transition-colors">Copy</button>
+                <pre id="css-code" class="code-block m-4"></pre>
+                <pre id="html-code" class="code-block m-4 hidden"></pre>
+            </div>
         </section>
     </main>
 
-    <script type="module" src="flex.js"></script>
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-gray-400 py-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col items-center gap-4 text-center">
+                <div class="flex items-center gap-3">
+                    <img src="../assets/logo.svg" alt="CSS Layout Tester" class="h-8 w-8 brightness-200">
+                    <span class="text-white font-semibold">CSS Layout Tester</span>
+                </div>
+                <p class="text-sm">Made with ❤️ for COS10026 @ Swinburne</p>
+                <a href="https://github.com/Arziel1992/css-layout-tester" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-sm text-gray-400 hover:text-white transition-colors">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                        <path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd" />
+                    </svg>
+                    <span>View on GitHub</span>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Info Modal -->
+    <div id="info-modal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+        <div class="relative p-4 w-full max-w-2xl max-h-full">
+            <div class="relative bg-white rounded-lg shadow">
+                <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t">
+                    <h3 id="modal-title" class="text-xl font-semibold text-gray-900"></h3>
+                    <button type="button" onclick="closeModal()" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center">
+                        <svg class="w-3 h-3" fill="none" viewBox="0 0 14 14">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                        </svg>
+                    </button>
+                </div>
+                <div id="modal-content" class="p-4 md:p-5 space-y-4 text-gray-600"></div>
+            </div>
+        </div>
+    </div>
+    <div id="modal-backdrop" class="hidden fixed inset-0 bg-gray-900 bg-opacity-50 z-40" onclick="closeModal()"></div>
+
+    <!-- Flowbite JS -->
+    <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
+
+    <script type="module">
+        // Property descriptions for modals
+        const propertyInfo = {
+            'display': {
+                title: 'display',
+                content: '<p class="mb-3"><strong>flex</strong>: Creates a block-level flex container. The element behaves like a block element and lays out its content according to the flexbox model.</p><p><strong>inline-flex</strong>: Creates an inline-level flex container. The element behaves like an inline element but lays out its content according to the flexbox model.</p>'
+            },
+            'flex-direction': {
+                title: 'flex-direction',
+                content: '<p class="mb-3">Establishes the main axis, defining the direction flex items are placed in the container.</p><ul class="list-disc pl-5 space-y-2"><li><strong>row</strong>: Items placed left to right (default)</li><li><strong>row-reverse</strong>: Items placed right to left</li><li><strong>column</strong>: Items placed top to bottom</li><li><strong>column-reverse</strong>: Items placed bottom to top</li></ul>'
+            },
+            'flex-wrap': {
+                title: 'flex-wrap',
+                content: '<p class="mb-3">Controls whether flex items are forced onto a single line or can wrap onto multiple lines.</p><ul class="list-disc pl-5 space-y-2"><li><strong>nowrap</strong>: All items on one line (default)</li><li><strong>wrap</strong>: Items wrap onto multiple lines, top to bottom</li><li><strong>wrap-reverse</strong>: Items wrap onto multiple lines, bottom to top</li></ul>'
+            },
+            'justify-content': {
+                title: 'justify-content',
+                content: '<p class="mb-3">Defines how the browser distributes space between and around content items along the main axis.</p><ul class="list-disc pl-5 space-y-2"><li><strong>flex-start</strong>: Items packed toward the start</li><li><strong>flex-end</strong>: Items packed toward the end</li><li><strong>center</strong>: Items centered along the line</li><li><strong>space-between</strong>: Items evenly distributed; first item at start, last at end</li><li><strong>space-around</strong>: Items evenly distributed with equal space around them</li><li><strong>space-evenly</strong>: Items evenly distributed with equal space between them</li></ul>'
+            },
+            'align-items': {
+                title: 'align-items',
+                content: '<p class="mb-3">Defines how flex items are aligned along the cross axis.</p><ul class="list-disc pl-5 space-y-2"><li><strong>stretch</strong>: Items stretched to fill container (default)</li><li><strong>flex-start</strong>: Items aligned to the start of the cross axis</li><li><strong>flex-end</strong>: Items aligned to the end of the cross axis</li><li><strong>center</strong>: Items centered on the cross axis</li><li><strong>baseline</strong>: Items aligned along their baselines</li></ul>'
+            },
+            'align-content': {
+                title: 'align-content',
+                content: '<p class="mb-3">Aligns flex lines within the flex container when there is extra space on the cross axis. Only works with multiple lines (flex-wrap: wrap).</p><ul class="list-disc pl-5 space-y-2"><li><strong>normal</strong>: Default packing behavior</li><li><strong>flex-start</strong>: Lines packed toward the start</li><li><strong>flex-end</strong>: Lines packed toward the end</li><li><strong>center</strong>: Lines centered in container</li><li><strong>space-between</strong>: Lines evenly distributed</li><li><strong>space-around</strong>: Lines with equal space around</li><li><strong>stretch</strong>: Lines stretch to fill container</li></ul>'
+            },
+            'row-gap': {
+                title: 'row-gap',
+                content: '<p class="mb-3">Sets the gap between rows. Accepts any CSS length value.</p><p class="mb-2"><strong>Examples:</strong></p><ul class="list-disc pl-5 space-y-1"><li><code class="bg-gray-100 px-1 rounded">0</code> - No gap</li><li><code class="bg-gray-100 px-1 rounded">10px</code> - 10 pixel gap</li><li><code class="bg-gray-100 px-1 rounded">1rem</code> - 1 rem gap</li><li><code class="bg-gray-100 px-1 rounded">2%</code> - 2% of container width</li></ul>'
+            },
+            'column-gap': {
+                title: 'column-gap',
+                content: '<p class="mb-3">Sets the gap between columns. Accepts any CSS length value.</p><p class="mb-2"><strong>Examples:</strong></p><ul class="list-disc pl-5 space-y-1"><li><code class="bg-gray-100 px-1 rounded">0</code> - No gap</li><li><code class="bg-gray-100 px-1 rounded">10px</code> - 10 pixel gap</li><li><code class="bg-gray-100 px-1 rounded">1rem</code> - 1 rem gap</li><li><code class="bg-gray-100 px-1 rounded">2%</code> - 2% of container width</li></ul>'
+            },
+            'order': {
+                title: 'order',
+                content: '<p class="mb-3">Controls the order in which flex items appear in the flex container. Items with lower order values appear first. Default is 0.</p><p class="mb-2"><strong>Examples:</strong></p><ul class="list-disc pl-5 space-y-1"><li><code class="bg-gray-100 px-1 rounded">-1</code> - Appears before items with order 0</li><li><code class="bg-gray-100 px-1 rounded">0</code> - Default order</li><li><code class="bg-gray-100 px-1 rounded">1</code> - Appears after items with order 0</li></ul>'
+            },
+            'flex-grow': {
+                title: 'flex-grow',
+                content: '<p class="mb-3">Defines the ability for a flex item to grow if necessary. It accepts a unitless value that serves as a proportion.</p><p class="mb-3">If all items have flex-grow set to 1, the remaining space is distributed equally. If one item has a value of 2, it takes up twice as much space as the others.</p><p><strong>Default:</strong> 0 (item will not grow)</p>'
+            },
+            'flex-shrink': {
+                title: 'flex-shrink',
+                content: '<p class="mb-3">Defines the ability for a flex item to shrink if necessary. It accepts a unitless value that serves as a proportion.</p><p class="mb-3">By default, all flex items can shrink. If you set it to 0, the item will not shrink.</p><p><strong>Default:</strong> 1 (item can shrink)</p>'
+            },
+            'flex-basis': {
+                title: 'flex-basis',
+                content: '<p class="mb-3">Defines the default size of an element before the remaining space is distributed. It can be a length (20%, 5rem, etc.) or a keyword.</p><ul class="list-disc pl-5 space-y-2"><li><strong>auto</strong>: Look at width/height property (default)</li><li><strong>content</strong>: Size based on content</li><li><strong>100px</strong>: Fixed size</li><li><strong>50%</strong>: Percentage of container</li></ul>'
+            },
+            'align-self': {
+                title: 'align-self',
+                content: '<p class="mb-3">Allows the default alignment (set by align-items) to be overridden for individual flex items.</p><ul class="list-disc pl-5 space-y-2"><li><strong>auto</strong>: Use parent\'s align-items value (default)</li><li><strong>flex-start</strong>: Align to start of cross axis</li><li><strong>flex-end</strong>: Align to end of cross axis</li><li><strong>center</strong>: Center on cross axis</li><li><strong>baseline</strong>: Align along baseline</li><li><strong>stretch</strong>: Stretch to fill container</li></ul>'
+            }
+        };
+
+        // Modal functions
+        window.openModal = function (property) {
+            const info = propertyInfo[property];
+            if (info) {
+                document.getElementById('modal-title').textContent = info.title;
+                document.getElementById('modal-content').innerHTML = info.content;
+                document.getElementById('info-modal').classList.remove('hidden');
+                document.getElementById('info-modal').classList.add('flex');
+                document.getElementById('modal-backdrop').classList.remove('hidden');
+            }
+        };
+
+        window.closeModal = function () {
+            document.getElementById('info-modal').classList.add('hidden');
+            document.getElementById('info-modal').classList.remove('flex');
+            document.getElementById('modal-backdrop').classList.add('hidden');
+        };
+
+        // Elements
+        const flexContainer = document.getElementById('flex-container');
+        const cssCodeEl = document.getElementById('css-code');
+        const htmlCodeEl = document.getElementById('html-code');
+        const itemSelect = document.getElementById('item-select');
+        const addItemBtn = document.getElementById('add-item');
+        const removeItemBtn = document.getElementById('remove-item');
+        const copyBtn = document.getElementById('copy-btn');
+        const tabCss = document.getElementById('tab-css');
+        const tabHtml = document.getElementById('tab-html');
+
+        // Parent inputs
+        const parentInputs = {
+            display: document.getElementById('display-property'),
+            flexDirection: document.getElementById('flex-direction'),
+            flexWrap: document.getElementById('flex-wrap'),
+            justifyContent: document.getElementById('justify-content'),
+            alignItems: document.getElementById('align-items'),
+            alignContent: document.getElementById('align-content'),
+            rowGap: document.getElementById('row-gap'),
+            columnGap: document.getElementById('column-gap')
+        };
+
+        // Child inputs
+        const childInputs = {
+            order: document.getElementById('order'),
+            flexGrow: document.getElementById('flex-grow'),
+            flexShrink: document.getElementById('flex-shrink'),
+            flexBasis: document.getElementById('flex-basis'),
+            alignSelf: document.getElementById('align-self')
+        };
+
+        let currentTab = 'css';
+
+        function updateParentProperties() {
+            flexContainer.style.display = parentInputs.display.value;
+            flexContainer.style.flexDirection = parentInputs.flexDirection.value;
+            flexContainer.style.flexWrap = parentInputs.flexWrap.value;
+            flexContainer.style.justifyContent = parentInputs.justifyContent.value;
+            flexContainer.style.alignItems = parentInputs.alignItems.value;
+            flexContainer.style.alignContent = parentInputs.alignContent.value;
+            flexContainer.style.rowGap = parentInputs.rowGap.value;
+            flexContainer.style.columnGap = parentInputs.columnGap.value;
+            updateCodePreview();
+        }
+
+        function updateChildProperties() {
+            const selectedItem = document.getElementById(itemSelect.value);
+            if (selectedItem) {
+                selectedItem.style.order = childInputs.order.value;
+                selectedItem.style.flexGrow = childInputs.flexGrow.value;
+                selectedItem.style.flexShrink = childInputs.flexShrink.value;
+                selectedItem.style.flexBasis = childInputs.flexBasis.value;
+                selectedItem.style.alignSelf = childInputs.alignSelf.value;
+            }
+            updateCodePreview();
+        }
+
+        function loadChildProperties() {
+            document.querySelectorAll('.flex-item').forEach(item => item.classList.remove('selected'));
+            const selectedItem = document.getElementById(itemSelect.value);
+            if (selectedItem) {
+                selectedItem.classList.add('selected');
+                childInputs.order.value = selectedItem.style.order || '0';
+                childInputs.flexGrow.value = selectedItem.style.flexGrow || '0';
+                childInputs.flexShrink.value = selectedItem.style.flexShrink || '1';
+                childInputs.flexBasis.value = selectedItem.style.flexBasis || 'auto';
+                childInputs.alignSelf.value = selectedItem.style.alignSelf || 'auto';
+            }
+        }
+
+        function updateCodePreview() {
+            let css = `.container {\n`;
+            css += `  display: ${parentInputs.display.value};\n`;
+            css += `  flex-direction: ${parentInputs.flexDirection.value};\n`;
+            css += `  flex-wrap: ${parentInputs.flexWrap.value};\n`;
+            css += `  justify-content: ${parentInputs.justifyContent.value};\n`;
+            css += `  align-items: ${parentInputs.alignItems.value};\n`;
+            css += `  align-content: ${parentInputs.alignContent.value};\n`;
+            if (parentInputs.rowGap.value !== '0') css += `  row-gap: ${parentInputs.rowGap.value};\n`;
+            if (parentInputs.columnGap.value !== '0') css += `  column-gap: ${parentInputs.columnGap.value};\n`;
+            css += `}`;
+
+            const selectedItem = document.getElementById(itemSelect.value);
+            if (selectedItem) {
+                css += `\n\n#${itemSelect.value} {\n`;
+                css += `  order: ${childInputs.order.value};\n`;
+                css += `  flex-grow: ${childInputs.flexGrow.value};\n`;
+                css += `  flex-shrink: ${childInputs.flexShrink.value};\n`;
+                css += `  flex-basis: ${childInputs.flexBasis.value};\n`;
+                css += `  align-self: ${childInputs.alignSelf.value};\n`;
+                css += `}`;
+            }
+
+            const highlightedCss = css
+                .replace(/([a-z-]+):/g, '<span class="property">$1</span>:')
+                .replace(/: ([^;{}\n]+)/g, ': <span class="value">$1</span>')
+                .replace(/(\.[a-z-]+|#[a-z0-9]+)/gi, '<span class="selector">$1</span>');
+            cssCodeEl.innerHTML = highlightedCss;
+
+            const items = document.querySelectorAll('.flex-item');
+            let html = `<div class="container">\n`;
+            items.forEach((item, i) => {
+                html += `  <div class="item" id="item${i + 1}">Item ${i + 1}</div>\n`;
+            });
+            html += `</div>`;
+            const highlightedHtml = html
+                .replace(/(<\/?[a-z]+)/gi, '<span class="tag">$1</span>')
+                .replace(/(class|id)=/g, '<span class="attr">$1</span>=')
+                .replace(/"([^"]+)"/g, '"<span class="string">$1</span>"');
+            htmlCodeEl.innerHTML = highlightedHtml;
+        }
+
+        addItemBtn.addEventListener('click', () => {
+            const items = document.querySelectorAll('.flex-item');
+            const newNum = items.length + 1;
+            const newItem = document.createElement('div');
+            newItem.className = 'flex-item';
+            newItem.id = `item${newNum}`;
+            newItem.textContent = `Item ${newNum}`;
+            flexContainer.appendChild(newItem);
+            const option = document.createElement('option');
+            option.value = `item${newNum}`;
+            option.textContent = `Item ${newNum}`;
+            itemSelect.appendChild(option);
+            updateCodePreview();
+        });
+
+        removeItemBtn.addEventListener('click', () => {
+            const items = document.querySelectorAll('.flex-item');
+            if (items.length > 1) {
+                const lastItem = items[items.length - 1];
+                lastItem.remove();
+                itemSelect.lastChild.remove();
+                if (itemSelect.value === lastItem.id) {
+                    itemSelect.value = itemSelect.options[0].value;
+                    loadChildProperties();
+                }
+                updateCodePreview();
+            }
+        });
+
+        tabCss.addEventListener('click', () => {
+            currentTab = 'css';
+            tabCss.classList.add('bg-primary-100', 'text-primary-700');
+            tabCss.classList.remove('text-gray-600', 'hover:bg-gray-100');
+            tabHtml.classList.remove('bg-primary-100', 'text-primary-700');
+            tabHtml.classList.add('text-gray-600', 'hover:bg-gray-100');
+            cssCodeEl.classList.remove('hidden');
+            htmlCodeEl.classList.add('hidden');
+        });
+
+        tabHtml.addEventListener('click', () => {
+            currentTab = 'html';
+            tabHtml.classList.add('bg-primary-100', 'text-primary-700');
+            tabHtml.classList.remove('text-gray-600', 'hover:bg-gray-100');
+            tabCss.classList.remove('bg-primary-100', 'text-primary-700');
+            tabCss.classList.add('text-gray-600', 'hover:bg-gray-100');
+            htmlCodeEl.classList.remove('hidden');
+            cssCodeEl.classList.add('hidden');
+        });
+
+        copyBtn.addEventListener('click', () => {
+            const code = currentTab === 'css' ? cssCodeEl.textContent : htmlCodeEl.textContent;
+            navigator.clipboard.writeText(code).then(() => {
+                copyBtn.textContent = 'Copied!';
+                copyBtn.classList.add('bg-primary-600', 'border-primary-500', 'text-white');
+                setTimeout(() => {
+                    copyBtn.textContent = 'Copy';
+                    copyBtn.classList.remove('bg-primary-600', 'border-primary-500', 'text-white');
+                }, 2000);
+            });
+        });
+
+        // Event listeners
+        Object.values(parentInputs).forEach(input => {
+            input.addEventListener('input', updateParentProperties);
+            input.addEventListener('change', updateParentProperties);
+        });
+
+        Object.values(childInputs).forEach(input => {
+            input.addEventListener('input', updateChildProperties);
+            input.addEventListener('change', updateChildProperties);
+        });
+
+        itemSelect.addEventListener('change', loadChildProperties);
+
+        // Initialize
+        updateParentProperties();
+        loadChildProperties();
+        updateCodePreview();
+
+        // i18n
+        let currentLocale = localStorage.getItem('locale') || 'en';
+        let translations = {};
+        async function loadTranslations(locale) {
+            try {
+                const response = await fetch(`../locales/${locale}.json`);
+                translations = await response.json();
+                document.getElementById('current-lang').textContent = locale.toUpperCase();
+            } catch (error) {
+                console.error('Failed to load translations:', error);
+            }
+        }
+        window.setLanguage = function (locale) {
+            currentLocale = locale;
+            localStorage.setItem('locale', locale);
+            loadTranslations(locale);
+        };
+        loadTranslations(currentLocale);
+    </script>
 </body>
 
 </html>

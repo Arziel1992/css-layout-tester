@@ -1,0 +1,123 @@
+@import 'tailwindcss';
+@plugin "flowbite/plugin";
+
+/* Custom theme overrides */
+@theme {
+    --color-primary-50: #e6f7e6;
+    --color-primary-100: #ccefcc;
+    --color-primary-200: #99df99;
+    --color-primary-300: #66cf66;
+    --color-primary-400: #33bf33;
+    --color-primary-500: #028f00;
+    --color-primary-600: #027200;
+    --color-primary-700: #015500;
+    --color-primary-800: #013800;
+    --color-primary-900: #001b00;
+    --color-primary-950: #000e00;
+
+    --font-family-sans: 'Inter', system-ui, sans-serif;
+    --font-family-mono: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+/* Base styles */
+body {
+    @apply bg-gray-50 text-gray-900 antialiased;
+    font-family: var(--font-family-sans);
+}
+
+/* Code preview area - isolated from page styling */
+.code-output {
+    @apply font-mono text-sm bg-gray-900 text-gray-100 rounded-lg p-4 overflow-x-auto;
+}
+
+.code-output .property {
+    @apply text-cyan-400;
+}
+
+.code-output .value {
+    @apply text-yellow-300;
+}
+
+.code-output .selector {
+    @apply text-pink-400;
+}
+
+.code-output .punctuation {
+    @apply text-gray-300;
+}
+
+/* Preview container - for testing layouts */
+.preview-container {
+    @apply bg-white border-2 border-dashed border-primary-200 rounded-lg p-4 min-h-96 transition-all duration-300;
+}
+
+.preview-item {
+    @apply bg-primary-500 text-white font-bold py-4 px-6 rounded text-center shadow-md transition-all duration-200;
+}
+
+.preview-item:nth-child(odd) {
+    @apply bg-primary-600;
+}
+
+.preview-item:nth-child(3n) {
+    @apply bg-primary-700;
+}
+
+/* Control panel styles */
+.control-group {
+    @apply mb-4;
+}
+
+.control-group label {
+    @apply block mb-2 text-sm font-medium text-gray-700;
+}
+
+.control-group input,
+.control-group select,
+.control-group textarea {
+    @apply w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors;
+}
+
+.control-group .info-tooltip {
+    @apply inline-flex items-center justify-center w-4 h-4 text-xs bg-primary-100 text-primary-700 rounded-full ml-1 cursor-help;
+}
+
+/* Axis visualization */
+.axis-overlay {
+    @apply pointer-events-none absolute inset-0;
+}
+
+.axis-main {
+    @apply border-b-2 border-dashed border-red-400;
+}
+
+.axis-cross {
+    @apply border-l-2 border-dashed border-blue-400;
+}
+
+/* Grid line visualization */
+.grid-lines-overlay {
+    @apply pointer-events-none absolute inset-0;
+    background-image:
+        linear-gradient(to right, rgba(2, 143, 0, 0.2) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(2, 143, 0, 0.2) 1px, transparent 1px);
+}
+
+/* Copy button */
+.copy-btn {
+    @apply absolute top-3 right-3 px-3 py-1.5 text-xs font-medium text-gray-300 bg-gray-800 hover:bg-gray-700 rounded border border-gray-700 transition-colors;
+}
+
+.copy-btn.copied {
+    @apply bg-primary-600 text-white border-primary-500;
+}
+
+/* Experimental feature badge */
+.experimental-badge {
+    @apply inline-flex items-center px-2 py-0.5 text-xs font-medium bg-amber-100 text-amber-800 rounded-full;
+}
+
+/* Language toggle */
+.lang-toggle {
+    @apply flex items-center gap-2 px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100 rounded-lg transition-colors;
+}

@@ -4,61 +4,350 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CSS Layout Tester</title>
-    <link rel="stylesheet" href="assets/css/main.css">
+    <title>CSS Layout Tester - Master Grid & Flexbox</title>
+    <meta name="description" content="Interactive tools for learning and mastering CSS Grid and Flexbox layouts with real-time visual feedback and copy-ready code.">
+
+    <!-- Open Graph / Social -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="CSS Layout Tester">
+    <meta property="og:description" content="Master CSS Grid and Flexbox with interactive visual tools">
+    <meta property="og:image" content="assets/logo.svg">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    <!-- Tailwind v4 CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#e6f7e6',
+                            100: '#ccefcc',
+                            200: '#99df99',
+                            300: '#66cf66',
+                            400: '#33bf33',
+                            500: '#028f00',
+                            600: '#027200',
+                            700: '#015500',
+                            800: '#013800',
+                            900: '#001b00',
+                            950: '#000e00'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Flowbite -->
+    <link href="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.css" rel="stylesheet">
 </head>
 
-<body>
-    <div class="container">
-        <header>
-            <h1>CSS Layout Tester</h1>
-            <p class="subtitle">Interactive tools to learn modern CSS layouts</p>
-        </header>
+<body class="bg-gray-50 min-h-screen">
+    <!-- Navigation -->
+    <nav class="bg-white border-b border-gray-200 fixed w-full z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center gap-3">
+                    <img src="assets/logo.svg" alt="CSS Layout Tester" class="h-8 w-8">
+                    <span class="font-semibold text-gray-900 text-lg" data-i18n="app.name">CSS Layout Tester</span>
+                </div>
 
-        <main>
-            <section class="cards">
-                <article class="card">
-                    <div class="card-header">
-                        <h2>Flexbox Tester</h2>
-                    </div>
-                    <div class="card-body">
-                        <p>Test how to use CSS Flexbox for one-dimensional layouts. Perfect for creating responsive navigation, card layouts, and centering elements.</p>
-                        <ul>
-                            <li>Control parent container properties</li>
-                            <li>Modify individual flex items</li>
-                            <li>See real-time CSS code updates</li>
-                            <li>Test different flex properties</li>
+                <div class="flex items-center gap-4">
+                    <a href="flexbox/flex.html" class="text-gray-600 hover:text-primary-600 font-medium transition-colors" data-i18n="nav.flexbox">Flexbox Tester</a>
+                    <a href="grid/grid.html" class="text-gray-600 hover:text-primary-600 font-medium transition-colors" data-i18n="nav.grid">Grid Tester</a>
+
+                    <!-- Language Dropdown -->
+                    <button id="lang-dropdown-btn" data-dropdown-toggle="lang-dropdown" class="flex items-center gap-2 px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100 rounded-lg transition-colors">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"></path>
+                        </svg>
+                        <span id="current-lang">EN</span>
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </button>
+                    <div id="lang-dropdown" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow-lg w-32">
+                        <ul class="py-2 text-sm text-gray-700">
+                            <li>
+                                <button onclick="setLanguage('en')" class="w-full text-left px-4 py-2 hover:bg-gray-100">English</button>
+                            </li>
+                            <li>
+                                <button onclick="setLanguage('es')" class="w-full text-left px-4 py-2 hover:bg-gray-100">Español</button>
+                            </li>
                         </ul>
                     </div>
-                    <div class="card-footer">
-                        <a href="flexbox/flex.html" class="btn">Open Flexbox Tester</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="pt-24 pb-16 bg-gradient-to-br from-primary-50 via-white to-primary-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12">
+            <div class="text-center max-w-3xl mx-auto">
+                <div class="inline-flex items-center gap-2 px-4 py-2 bg-primary-100 text-primary-700 rounded-full text-sm font-medium mb-6">
+                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                    </svg>
+                    <span data-i18n="home.features.learn.title">Learn by Doing</span>
+                </div>
+
+                <h1 class="text-5xl sm:text-6xl font-bold text-gray-900 mb-6 tracking-tight" data-i18n="home.hero.title">
+                    Master CSS Layouts
+                </h1>
+
+                <p class="text-xl text-gray-600 mb-10 leading-relaxed" data-i18n="home.hero.subtitle">
+                    Interactive tools for learning Grid and Flexbox
+                </p>
+
+                <div class="flex flex-wrap justify-center gap-4">
+                    <a href="flexbox/flex.html" class="inline-flex items-center gap-2 px-6 py-3 bg-primary-600 hover:bg-primary-700 text-white font-semibold rounded-lg shadow-lg shadow-primary-500/30 transition-all hover:shadow-xl hover:shadow-primary-500/40 hover:-translate-y-0.5">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17V7m0 10a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h2a2 2 0 012 2m0 10a2 2 0 002 2h2a2 2 0 002-2M9 7a2 2 0 012-2h2a2 2 0 012 2m0 10V7m0 10a2 2 0 002 2h2a2 2 0 002-2V7a2 2 0 00-2-2h-2a2 2 0 00-2 2"></path>
+                        </svg>
+                        <span data-i18n="home.hero.cta_flexbox">Try Flexbox</span>
+                    </a>
+                    <a href="grid/grid.html" class="inline-flex items-center gap-2 px-6 py-3 bg-white hover:bg-gray-50 text-gray-900 font-semibold rounded-lg border-2 border-gray-200 hover:border-primary-300 transition-all hover:-translate-y-0.5">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path>
+                        </svg>
+                        <span data-i18n="home.hero.cta_grid">Try Grid</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Feature 1 -->
+                <div class="text-center p-8 rounded-2xl bg-gray-50 border border-gray-100 hover:shadow-lg hover:border-primary-200 transition-all">
+                    <div class="inline-flex items-center justify-center w-14 h-14 bg-primary-100 text-primary-600 rounded-xl mb-6">
+                        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-3" data-i18n="home.features.realtime.title">Real-time Preview</h3>
+                    <p class="text-gray-600" data-i18n="home.features.realtime.description">See changes instantly as you adjust properties</p>
+                </div>
+
+                <!-- Feature 2 -->
+                <div class="text-center p-8 rounded-2xl bg-gray-50 border border-gray-100 hover:shadow-lg hover:border-primary-200 transition-all">
+                    <div class="inline-flex items-center justify-center w-14 h-14 bg-primary-100 text-primary-600 rounded-xl mb-6">
+                        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-3" data-i18n="home.features.code.title">Copy-Ready Code</h3>
+                    <p class="text-gray-600" data-i18n="home.features.code.description">Generate clean HTML and CSS for your projects</p>
+                </div>
+
+                <!-- Feature 3 -->
+                <div class="text-center p-8 rounded-2xl bg-gray-50 border border-gray-100 hover:shadow-lg hover:border-primary-200 transition-all">
+                    <div class="inline-flex items-center justify-center w-14 h-14 bg-primary-100 text-primary-600 rounded-xl mb-6">
+                        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-3" data-i18n="home.features.learn.title">Learn by Doing</h3>
+                    <p class="text-gray-600" data-i18n="home.features.learn.description">Understand layout concepts through experimentation</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tool Cards Section -->
+    <section class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- Flexbox Card -->
+                <article class="bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-100 hover:shadow-xl hover:border-primary-200 transition-all group">
+                    <div class="h-3 bg-gradient-to-r from-primary-500 to-primary-600"></div>
+                    <div class="p-8">
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="p-2 bg-primary-100 rounded-lg">
+                                <svg class="w-6 h-6 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17V7m0 10a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h2a2 2 0 012 2m0 10a2 2 0 002 2h2a2 2 0 002-2M9 7a2 2 0 012-2h2a2 2 0 012 2m0 10V7m0 10a2 2 0 002 2h2a2 2 0 002-2V7a2 2 0 00-2-2h-2a2 2 0 00-2 2"></path>
+                                </svg>
+                            </div>
+                            <h2 class="text-2xl font-bold text-gray-900" data-i18n="home.cards.flexbox.title">Flexbox Tester</h2>
+                        </div>
+
+                        <p class="text-gray-600 mb-6" data-i18n="home.cards.flexbox.description">
+                            Test CSS Flexbox for one-dimensional layouts. Perfect for navigation, card layouts, and centering elements.
+                        </p>
+
+                        <ul class="space-y-2 mb-8">
+                            <li class="flex items-center gap-2 text-gray-700">
+                                <svg class="w-5 h-5 text-primary-500" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                </svg>
+                                <span>Control parent container properties</span>
+                            </li>
+                            <li class="flex items-center gap-2 text-gray-700">
+                                <svg class="w-5 h-5 text-primary-500" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                </svg>
+                                <span>Modify individual flex items</span>
+                            </li>
+                            <li class="flex items-center gap-2 text-gray-700">
+                                <svg class="w-5 h-5 text-primary-500" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                </svg>
+                                <span>Real-time CSS code updates</span>
+                            </li>
+                            <li class="flex items-center gap-2 text-gray-700">
+                                <svg class="w-5 h-5 text-primary-500" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                </svg>
+                                <span>Axis visualization toggles</span>
+                            </li>
+                        </ul>
+
+                        <a href="flexbox/flex.html" class="inline-flex items-center gap-2 px-5 py-2.5 bg-primary-600 hover:bg-primary-700 text-white font-medium rounded-lg transition-colors group-hover:shadow-lg">
+                            <span data-i18n="home.cards.flexbox.cta">Open Flexbox Tester</span>
+                            <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                            </svg>
+                        </a>
                     </div>
                 </article>
 
-                <article class="card">
-                    <div class="card-header">
-                        <h2>CSS Grid Tester</h2>
-                    </div>
-                    <div class="card-body">
-                        <p>Test how to use CSS Grid for powerful two-dimensional layouts. Great for complex page structures, image galleries, and responsive designs.</p>
-                        <ul>
-                            <li>Design custom grid templates</li>
-                            <li>Position grid items precisely</li>
-                            <li>Create responsive grid layouts</li>
-                            <li>See real-time CSS code updates</li>
+                <!-- Grid Card -->
+                <article class="bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-100 hover:shadow-xl hover:border-primary-200 transition-all group">
+                    <div class="h-3 bg-gradient-to-r from-primary-600 to-primary-700"></div>
+                    <div class="p-8">
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="p-2 bg-primary-100 rounded-lg">
+                                <svg class="w-6 h-6 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path>
+                                </svg>
+                            </div>
+                            <h2 class="text-2xl font-bold text-gray-900" data-i18n="home.cards.grid.title">CSS Grid Tester</h2>
+                        </div>
+
+                        <p class="text-gray-600 mb-6" data-i18n="home.cards.grid.description">
+                            Test CSS Grid for powerful two-dimensional layouts. Great for complex page structures and responsive designs.
+                        </p>
+
+                        <ul class="space-y-2 mb-8">
+                            <li class="flex items-center gap-2 text-gray-700">
+                                <svg class="w-5 h-5 text-primary-500" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                </svg>
+                                <span>Design custom grid templates</span>
+                            </li>
+                            <li class="flex items-center gap-2 text-gray-700">
+                                <svg class="w-5 h-5 text-primary-500" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                </svg>
+                                <span>Position grid items precisely</span>
+                            </li>
+                            <li class="flex items-center gap-2 text-gray-700">
+                                <svg class="w-5 h-5 text-primary-500" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                </svg>
+                                <span>Subgrid support</span>
+                                <span class="inline-flex items-center px-2 py-0.5 text-xs font-medium bg-amber-100 text-amber-800 rounded-full">New</span>
+                            </li>
+                            <li class="flex items-center gap-2 text-gray-700">
+                                <svg class="w-5 h-5 text-primary-500" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                </svg>
+                                <span>Visual grid line overlay</span>
+                            </li>
                         </ul>
-                    </div>
-                    <div class="card-footer">
-                        <a href="grid/grid.html" class="btn">Open Grid Tester</a>
+
+                        <a href="grid/grid.html" class="inline-flex items-center gap-2 px-5 py-2.5 bg-primary-600 hover:bg-primary-700 text-white font-medium rounded-lg transition-colors group-hover:shadow-lg">
+                            <span data-i18n="home.cards.grid.cta">Open Grid Tester</span>
+                            <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                            </svg>
+                        </a>
                     </div>
                 </article>
-            </section>
-        </main>
+            </div>
+        </div>
+    </section>
 
-        <footer>
-            <p>Created for COS10026 - Web Development and Design at Swinburne University</p>
-        </footer>
-    </div>
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-gray-400 py-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col items-center gap-4 text-center">
+                <div class="flex items-center gap-3">
+                    <img src="assets/logo.svg" alt="CSS Layout Tester" class="h-8 w-8 brightness-200">
+                    <span class="text-white font-semibold">CSS Layout Tester</span>
+                </div>
+                <p class="text-sm">Made with ❤️ for COS10026 @ Swinburne</p>
+                <a href="https://github.com/Arziel1992/css-layout-tester" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-sm text-gray-400 hover:text-white transition-colors">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                        <path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd" />
+                    </svg>
+                    <span>View on GitHub</span>
+                </a>
+                <p class="text-xs text-gray-500">v2026-02-07-2251</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Flowbite JS -->
+    <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
+
+    <!-- i18n Script -->
+    <script type="module">
+        let currentLocale = localStorage.getItem('locale') || 'en';
+        let translations = {};
+
+        async function loadTranslations(locale) {
+            try {
+                const response = await fetch(`locales/${locale}.json`);
+                translations = await response.json();
+                applyTranslations();
+                document.getElementById('current-lang').textContent = locale.toUpperCase();
+            } catch (error) {
+                console.error('Failed to load translations:', error);
+            }
+        }
+
+        function getNestedValue(obj, path) {
+            return path.split('.').reduce((acc, part) => acc && acc[part], obj);
+        }
+
+        function applyTranslations() {
+            document.querySelectorAll('[data-i18n]').forEach(element => {
+                const key = element.getAttribute('data-i18n');
+                const translation = getNestedValue(translations, key);
+                if (translation) {
+                    element.textContent = translation;
+                }
+            });
+        }
+
+        window.setLanguage = function (locale) {
+            currentLocale = locale;
+            localStorage.setItem('locale', locale);
+            loadTranslations(locale);
+        };
+
+        // Initialize
+        loadTranslations(currentLocale);
+    </script>
 </body>
 
 </html>

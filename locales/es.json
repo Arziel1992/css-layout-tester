@@ -1,0 +1,233 @@
+{
+    "app": {
+        "name": "Probador de Diseño CSS",
+        "tagline": "Herramientas interactivas para aprender diseños CSS modernos",
+        "description": "Domina CSS Grid y Flexbox con retroalimentación visual en tiempo real"
+    },
+    "nav": {
+        "home": "Inicio",
+        "flexbox": "Probador Flexbox",
+        "grid": "Probador Grid",
+        "language": "Idioma"
+    },
+    "home": {
+        "hero": {
+            "title": "Domina los Diseños CSS",
+            "subtitle": "Herramientas interactivas para aprender Grid y Flexbox",
+            "cta_flexbox": "Probar Flexbox",
+            "cta_grid": "Probar Grid"
+        },
+        "features": {
+            "realtime": {
+                "title": "Vista Previa en Tiempo Real",
+                "description": "Ve los cambios instantáneamente al ajustar propiedades"
+            },
+            "code": {
+                "title": "Código Listo para Copiar",
+                "description": "Genera HTML y CSS limpios para tus proyectos"
+            },
+            "learn": {
+                "title": "Aprende Haciendo",
+                "description": "Comprende conceptos de diseño mediante experimentación"
+            }
+        },
+        "cards": {
+            "flexbox": {
+                "title": "Probador Flexbox",
+                "description": "Prueba CSS Flexbox para diseños unidimensionales. Perfecto para navegación, tarjetas y centrar elementos.",
+                "features": [
+                    "Controla propiedades del contenedor padre",
+                    "Modifica elementos flex individuales",
+                    "Actualizaciones de código CSS en tiempo real",
+                    "Visualización de ejes"
+                ],
+                "cta": "Abrir Probador Flexbox"
+            },
+            "grid": {
+                "title": "Probador CSS Grid",
+                "description": "Prueba CSS Grid para diseños bidimensionales potentes. Ideal para estructuras de página complejas y diseños responsivos.",
+                "features": [
+                    "Diseña plantillas de cuadrícula personalizadas",
+                    "Posiciona elementos con precisión",
+                    "Soporte de Subgrid",
+                    "Superposición de líneas de cuadrícula"
+                ],
+                "cta": "Abrir Probador Grid"
+            }
+        }
+    },
+    "flexbox": {
+        "title": "Probador Interactivo de Flexbox",
+        "guide_link": "Lee la Guía Completa en CSS-Tricks",
+        "parent": {
+            "title": "Propiedades del Padre",
+            "display": "display",
+            "display_desc": "Define un contenedor flex; inline o block.",
+            "flex_direction": "flex-direction",
+            "flex_direction_desc": "Establece la dirección del eje principal.",
+            "flex_wrap": "flex-wrap",
+            "flex_wrap_desc": "Permite que los elementos pasen a múltiples líneas.",
+            "flex_flow": "flex-flow",
+            "flex_flow_desc": "Atajo para direction y wrap.",
+            "justify_content": "justify-content",
+            "justify_content_desc": "Alineación a lo largo del eje principal.",
+            "align_items": "align-items",
+            "align_items_desc": "Alineación a lo largo del eje transversal.",
+            "align_content": "align-content",
+            "align_content_desc": "Alineación de líneas envueltas.",
+            "place_content": "place-content",
+            "place_content_desc": "Atajo para align y justify content.",
+            "gap": "gap",
+            "gap_desc": "Espacio entre elementos flex.",
+            "row_gap": "row-gap",
+            "row_gap_desc": "Espacio entre filas.",
+            "column_gap": "column-gap",
+            "column_gap_desc": "Espacio entre columnas."
+        },
+        "child": {
+            "title": "Propiedades del Hijo",
+            "select_item": "Seleccionar Elemento",
+            "order": "order",
+            "order_desc": "Controla el orden visual de los elementos.",
+            "flex_grow": "flex-grow",
+            "flex_grow_desc": "Capacidad de crecer si es necesario.",
+            "flex_shrink": "flex-shrink",
+            "flex_shrink_desc": "Capacidad de reducirse si es necesario.",
+            "flex_basis": "flex-basis",
+            "flex_basis_desc": "Tamaño predeterminado antes de la distribución.",
+            "align_self": "align-self",
+            "align_self_desc": "Anular alineación para este elemento."
+        },
+        "preview": {
+            "title": "Vista Previa del Contenedor Flex",
+            "add_item": "Agregar Elemento",
+            "remove_item": "Eliminar Elemento",
+            "item": "Elemento"
+        },
+        "code": {
+            "title": "Código Generado",
+            "tab_css": "CSS",
+            "tab_html": "HTML",
+            "copy": "Copiar",
+            "copied": "¡Copiado!"
+        },
+        "axis": {
+            "show_axes": "Mostrar Ejes",
+            "main_axis": "Eje Principal",
+            "cross_axis": "Eje Transversal"
+        },
+        "presets": {
+            "title": "Diseños Predefinidos",
+            "holy_grail": "Holy Grail",
+            "centered": "Centrado",
+            "sidebar": "Barra Lateral",
+            "navbar": "Barra de Navegación",
+            "cards": "Cuadrícula de Tarjetas"
+        }
+    },
+    "grid": {
+        "title": "Probador Interactivo de CSS Grid",
+        "guide_link": "Lee la Guía Completa en CSS-Tricks",
+        "parent": {
+            "title": "Propiedades del Padre",
+            "display": "display",
+            "display_desc": "Define el elemento como contenedor de cuadrícula.",
+            "grid_template_columns": "grid-template-columns",
+            "grid_template_columns_desc": "Define columnas con valores separados por espacios.",
+            "grid_template_rows": "grid-template-rows",
+            "grid_template_rows_desc": "Define filas con valores separados por espacios.",
+            "grid_template_areas": "grid-template-areas",
+            "grid_template_areas_desc": "Define plantilla por nombres de área.",
+            "gap": "gap",
+            "gap_desc": "Espacio entre elementos de cuadrícula.",
+            "row_gap": "row-gap",
+            "row_gap_desc": "Espacio entre filas.",
+            "column_gap": "column-gap",
+            "column_gap_desc": "Espacio entre columnas.",
+            "justify_items": "justify-items",
+            "justify_items_desc": "Alinear elementos en eje inline.",
+            "align_items": "align-items",
+            "align_items_desc": "Alinear elementos en eje block.",
+            "place_items": "place-items",
+            "place_items_desc": "Atajo para align y justify items.",
+            "justify_content": "justify-content",
+            "justify_content_desc": "Alinear cuadrícula en eje inline.",
+            "align_content": "align-content",
+            "align_content_desc": "Alinear cuadrícula en eje block.",
+            "place_content": "place-content",
+            "place_content_desc": "Atajo para alineación de contenido.",
+            "grid_auto_flow": "grid-auto-flow",
+            "grid_auto_flow_desc": "Algoritmo de colocación automática.",
+            "grid_auto_columns": "grid-auto-columns",
+            "grid_auto_columns_desc": "Tamaño de columnas implícitas.",
+            "grid_auto_rows": "grid-auto-rows",
+            "grid_auto_rows_desc": "Tamaño de filas implícitas."
+        },
+        "child": {
+            "title": "Propiedades del Hijo",
+            "select_item": "Seleccionar Elemento",
+            "grid_column": "grid-column",
+            "grid_column_desc": "Ubicación de columna del elemento.",
+            "grid_row": "grid-row",
+            "grid_row_desc": "Ubicación de fila del elemento.",
+            "justify_self": "justify-self",
+            "justify_self_desc": "Alinear elemento en eje inline.",
+            "align_self": "align-self",
+            "align_self_desc": "Alinear elemento en eje block.",
+            "place_self": "place-self",
+            "place_self_desc": "Atajo para alineación propia.",
+            "grid_area": "grid-area",
+            "grid_area_desc": "Nombre o atajo para ubicación.",
+            "order": "order",
+            "order_desc": "Controla el orden visual."
+        },
+        "preview": {
+            "title": "Vista Previa del Contenedor Grid",
+            "add_item": "Agregar Elemento",
+            "remove_item": "Eliminar Elemento",
+            "item": "Elemento",
+            "show_grid_lines": "Mostrar Líneas de Cuadrícula"
+        },
+        "code": {
+            "title": "Código Generado",
+            "tab_css": "CSS",
+            "tab_html": "HTML",
+            "copy": "Copiar",
+            "copied": "¡Copiado!"
+        },
+        "experimental": {
+            "subgrid": {
+                "title": "Subgrid",
+                "description": "Heredar pistas de cuadrícula padre.",
+                "caniuse": "Ver soporte de navegadores"
+            },
+            "masonry": {
+                "title": "Diseño Masonry",
+                "description": "Empaquetado dinámico estilo Pinterest.",
+                "caniuse": "Ver soporte de navegadores",
+                "warning": "Función experimental"
+            }
+        },
+        "presets": {
+            "title": "Diseños Predefinidos",
+            "twelve_column": "Cuadrícula de 12 Columnas",
+            "holy_grail": "Holy Grail",
+            "dashboard": "Panel de Control",
+            "gallery": "Galería de Imágenes",
+            "responsive": "Tarjetas Responsivas"
+        },
+        "tips": {
+            "title": "Consejos",
+            "tip1": "repeat(3, 1fr) - Tres columnas iguales",
+            "tip2": "1fr 2fr 1fr - Columna central el doble de ancho",
+            "tip3": "minmax(100px, 1fr) - Columna con ancho mínimo"
+        }
+    },
+    "common": {
+        "back_home": "Volver al Inicio",
+        "experimental": "Experimental",
+        "browser_support": "Soporte de Navegadores",
+        "footer": "Hecho con ❤️ para COS10026 @ Swinburne",
+        "view_on_github": "Ver en GitHub"
+    }
+}

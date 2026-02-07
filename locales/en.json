@@ -1,0 +1,233 @@
+{
+    "app": {
+        "name": "CSS Layout Tester",
+        "tagline": "Interactive tools to learn modern CSS layouts",
+        "description": "Master CSS Grid and Flexbox with real-time visual feedback"
+    },
+    "nav": {
+        "home": "Home",
+        "flexbox": "Flexbox Tester",
+        "grid": "Grid Tester",
+        "language": "Language"
+    },
+    "home": {
+        "hero": {
+            "title": "Master CSS Layouts",
+            "subtitle": "Interactive tools for learning Grid and Flexbox",
+            "cta_flexbox": "Try Flexbox",
+            "cta_grid": "Try Grid"
+        },
+        "features": {
+            "realtime": {
+                "title": "Real-time Preview",
+                "description": "See changes instantly as you adjust properties"
+            },
+            "code": {
+                "title": "Copy-Ready Code",
+                "description": "Generate clean HTML and CSS for your projects"
+            },
+            "learn": {
+                "title": "Learn by Doing",
+                "description": "Understand layout concepts through experimentation"
+            }
+        },
+        "cards": {
+            "flexbox": {
+                "title": "Flexbox Tester",
+                "description": "Test CSS Flexbox for one-dimensional layouts. Perfect for navigation, card layouts, and centering elements.",
+                "features": [
+                    "Control parent container properties",
+                    "Modify individual flex items",
+                    "Real-time CSS code updates",
+                    "Axis visualization toggles"
+                ],
+                "cta": "Open Flexbox Tester"
+            },
+            "grid": {
+                "title": "CSS Grid Tester",
+                "description": "Test CSS Grid for powerful two-dimensional layouts. Great for complex page structures and responsive designs.",
+                "features": [
+                    "Design custom grid templates",
+                    "Position grid items precisely",
+                    "Subgrid support",
+                    "Visual grid line overlay"
+                ],
+                "cta": "Open Grid Tester"
+            }
+        }
+    },
+    "flexbox": {
+        "title": "Interactive Flexbox Tester",
+        "guide_link": "Read the Full Guide on CSS-Tricks",
+        "parent": {
+            "title": "Parent Properties",
+            "display": "display",
+            "display_desc": "Defines a flex container; inline or block.",
+            "flex_direction": "flex-direction",
+            "flex_direction_desc": "Establishes the main-axis direction.",
+            "flex_wrap": "flex-wrap",
+            "flex_wrap_desc": "Allow items to wrap onto multiple lines.",
+            "flex_flow": "flex-flow",
+            "flex_flow_desc": "Shorthand for direction and wrap.",
+            "justify_content": "justify-content",
+            "justify_content_desc": "Alignment along the main axis.",
+            "align_items": "align-items",
+            "align_items_desc": "Alignment along the cross axis.",
+            "align_content": "align-content",
+            "align_content_desc": "Alignment of wrapped lines.",
+            "place_content": "place-content",
+            "place_content_desc": "Shorthand for align and justify content.",
+            "gap": "gap",
+            "gap_desc": "Space between flex items.",
+            "row_gap": "row-gap",
+            "row_gap_desc": "Space between rows.",
+            "column_gap": "column-gap",
+            "column_gap_desc": "Space between columns."
+        },
+        "child": {
+            "title": "Child Properties",
+            "select_item": "Select Item",
+            "order": "order",
+            "order_desc": "Controls visual order of items.",
+            "flex_grow": "flex-grow",
+            "flex_grow_desc": "Ability to grow if necessary.",
+            "flex_shrink": "flex-shrink",
+            "flex_shrink_desc": "Ability to shrink if necessary.",
+            "flex_basis": "flex-basis",
+            "flex_basis_desc": "Default size before distribution.",
+            "align_self": "align-self",
+            "align_self_desc": "Override alignment for this item."
+        },
+        "preview": {
+            "title": "Flex Container Preview",
+            "add_item": "Add Item",
+            "remove_item": "Remove Item",
+            "item": "Item"
+        },
+        "code": {
+            "title": "Generated Code",
+            "tab_css": "CSS",
+            "tab_html": "HTML",
+            "copy": "Copy",
+            "copied": "Copied!"
+        },
+        "axis": {
+            "show_axes": "Show Axes",
+            "main_axis": "Main Axis",
+            "cross_axis": "Cross Axis"
+        },
+        "presets": {
+            "title": "Preset Layouts",
+            "holy_grail": "Holy Grail",
+            "centered": "Centered",
+            "sidebar": "Sidebar",
+            "navbar": "Navigation Bar",
+            "cards": "Card Grid"
+        }
+    },
+    "grid": {
+        "title": "Interactive CSS Grid Tester",
+        "guide_link": "Read the Full Guide on CSS-Tricks",
+        "parent": {
+            "title": "Parent Properties",
+            "display": "display",
+            "display_desc": "Defines the element as a grid container.",
+            "grid_template_columns": "grid-template-columns",
+            "grid_template_columns_desc": "Defines columns with space-separated values.",
+            "grid_template_rows": "grid-template-rows",
+            "grid_template_rows_desc": "Defines rows with space-separated values.",
+            "grid_template_areas": "grid-template-areas",
+            "grid_template_areas_desc": "Defines grid template by area names.",
+            "gap": "gap",
+            "gap_desc": "Space between grid items.",
+            "row_gap": "row-gap",
+            "row_gap_desc": "Space between rows.",
+            "column_gap": "column-gap",
+            "column_gap_desc": "Space between columns.",
+            "justify_items": "justify-items",
+            "justify_items_desc": "Align items along inline axis.",
+            "align_items": "align-items",
+            "align_items_desc": "Align items along block axis.",
+            "place_items": "place-items",
+            "place_items_desc": "Shorthand for align and justify items.",
+            "justify_content": "justify-content",
+            "justify_content_desc": "Align grid along inline axis.",
+            "align_content": "align-content",
+            "align_content_desc": "Align grid along block axis.",
+            "place_content": "place-content",
+            "place_content_desc": "Shorthand for content alignment.",
+            "grid_auto_flow": "grid-auto-flow",
+            "grid_auto_flow_desc": "Auto-placement algorithm.",
+            "grid_auto_columns": "grid-auto-columns",
+            "grid_auto_columns_desc": "Size of implicitly-created columns.",
+            "grid_auto_rows": "grid-auto-rows",
+            "grid_auto_rows_desc": "Size of implicitly-created rows."
+        },
+        "child": {
+            "title": "Child Properties",
+            "select_item": "Select Item",
+            "grid_column": "grid-column",
+            "grid_column_desc": "Item's column location.",
+            "grid_row": "grid-row",
+            "grid_row_desc": "Item's row location.",
+            "justify_self": "justify-self",
+            "justify_self_desc": "Align item along inline axis.",
+            "align_self": "align-self",
+            "align_self_desc": "Align item along block axis.",
+            "place_self": "place-self",
+            "place_self_desc": "Shorthand for self alignment.",
+            "grid_area": "grid-area",
+            "grid_area_desc": "Name or shorthand for placement.",
+            "order": "order",
+            "order_desc": "Controls visual order."
+        },
+        "preview": {
+            "title": "Grid Container Preview",
+            "add_item": "Add Item",
+            "remove_item": "Remove Item",
+            "item": "Item",
+            "show_grid_lines": "Show Grid Lines"
+        },
+        "code": {
+            "title": "Generated Code",
+            "tab_css": "CSS",
+            "tab_html": "HTML",
+            "copy": "Copy",
+            "copied": "Copied!"
+        },
+        "experimental": {
+            "subgrid": {
+                "title": "Subgrid",
+                "description": "Inherit parent grid tracks.",
+                "caniuse": "Check browser support"
+            },
+            "masonry": {
+                "title": "Masonry Layout",
+                "description": "Pinterest-style dynamic packing.",
+                "caniuse": "Check browser support",
+                "warning": "Experimental feature"
+            }
+        },
+        "presets": {
+            "title": "Preset Layouts",
+            "twelve_column": "12-Column Grid",
+            "holy_grail": "Holy Grail",
+            "dashboard": "Dashboard",
+            "gallery": "Image Gallery",
+            "responsive": "Responsive Cards"
+        },
+        "tips": {
+            "title": "Tips",
+            "tip1": "repeat(3, 1fr) - Three equal columns",
+            "tip2": "1fr 2fr 1fr - Middle column twice as wide",
+            "tip3": "minmax(100px, 1fr) - Column with min width"
+        }
+    },
+    "common": {
+        "back_home": "Back to Home",
+        "experimental": "Experimental",
+        "browser_support": "Browser Support",
+        "footer": "Made with ❤️ for COS10026 @ Swinburne",
+        "view_on_github": "View on GitHub"
+    }
+}

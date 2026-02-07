@@ -1,0 +1,25 @@
+{
+    "name": "css-layout-tester",
+    "version": "2026.02.07-2251",
+    "description": "Interactive CSS Grid and Flexbox testing tools for learning modern CSS layouts",
+    "type": "module",
+    "scripts": {
+        "dev": "npx serve .",
+        "build": "npx tailwindcss -i ./src/input.css -o ./assets/css/main.css --minify"
+    },
+    "keywords": [
+        "css",
+        "grid",
+        "flexbox",
+        "layout",
+        "tester",
+        "interactive",
+        "learning"
+    ],
+    "author": "",
+    "license": "MIT",
+    "devDependencies": {
+        "tailwindcss": "^4.0.6",
+        "flowbite": "^3.1.2"
+    }
+}
