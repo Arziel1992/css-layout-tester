@@ -391,7 +391,7 @@
     </footer>
 
     <!-- Info Modal -->
-    <div id="info-modal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+    <div id="info-modal" tabindex="-1" aria-hidden="true" onclick="if(event.target === this) closeModal()" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
         <div class="relative p-4 w-full max-w-2xl max-h-full">
             <div class="relative bg-white rounded-lg shadow">
                 <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t">
@@ -406,7 +406,7 @@
             </div>
         </div>
     </div>
-    <div id="modal-backdrop" class="hidden fixed inset-0 bg-gray-900 bg-opacity-50 z-40" onclick="closeModal()"></div>
+    <div id="modal-backdrop" class="hidden fixed inset-0 bg-black/60 backdrop-blur-md z-40" onclick="closeModal()"></div>
 
     <!-- Flowbite JS -->
     <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
@@ -563,7 +563,14 @@
             const itemLabel = getTranslation('grid.preview.item') || 'Item';
             items.forEach((item, i) => { html += `  <div class="item" id="item${i + 1}">${itemLabel} ${i + 1}</div>\n`; });
             html += `</div>`;
-            const highlightedHtml = html.replace(/(<\/?[a-z]+)/gi, '<span class="tag">$1</span>').replace(/(class|id)=/g, '<span class="attr">$1</span>=').replace(/"([^"]+)"/g, '"<span class="string">$1</span>"');
+            const highlightedHtml = html
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/="([^"]+)"/g, '="<span class="string">$1</span>"')
+                .replace(/(\s)(class|id)=/g, '$1<span class="attr">$2</span>=')
+                .replace(/(&lt;\/?[a-z0-9]+)/gi, '<span class="tag">$1</span>')
+                .replace(/(&gt;)/g, '<span class="tag">$1</span>');
             htmlCodeEl.innerHTML = highlightedHtml;
         }
 
