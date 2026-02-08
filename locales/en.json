@@ -186,7 +186,8 @@
             "add_item": "Add Item",
             "remove_item": "Remove Item",
             "item": "Item",
-            "show_grid_lines": "Show Grid Lines"
+            "show_grid_lines": "Show Grid Lines",
+            "tips": "Tips"
         },
         "code": {
             "title": "Generated Code",
@@ -228,6 +229,7 @@
         "experimental": "Experimental",
         "browser_support": "Browser Support",
         "footer": "Made with ❤️ for COS10026 @ Swinburne",
-        "view_on_github": "View on GitHub"
+        "view_on_github": "View on GitHub",
+        "new": "New"
     }
 }

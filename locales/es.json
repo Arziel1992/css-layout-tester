@@ -186,7 +186,8 @@
             "add_item": "Agregar Elemento",
             "remove_item": "Eliminar Elemento",
             "item": "Elemento",
-            "show_grid_lines": "Mostrar Líneas de Cuadrícula"
+            "show_grid_lines": "Mostrar Líneas de Cuadrícula",
+            "tips": "Consejos"
         },
         "code": {
             "title": "Código Generado",
@@ -228,6 +229,7 @@
         "experimental": "Experimental",
         "browser_support": "Soporte de Navegadores",
         "footer": "Hecho con ❤️ para COS10026 @ Swinburne",
-        "view_on_github": "Ver en GitHub"
+        "view_on_github": "Ver en GitHub",
+        "new": "Nuevo"
     }
 }

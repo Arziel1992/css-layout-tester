@@ -15,105 +15,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
-    <!-- Tailwind v4 CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        primary: {
-                            50: '#e6f7e6', 100: '#ccefcc', 200: '#99df99', 300: '#66cf66',
-                            400: '#33bf33', 500: '#028f00', 600: '#027200', 700: '#015500',
-                            800: '#013800', 900: '#001b00', 950: '#000e00'
-                        }
-                    },
-                    fontFamily: {
-                        sans: ['Inter', 'system-ui', 'sans-serif'],
-                        mono: ['JetBrains Mono', 'monospace']
-                    }
-                }
-            }
-        }
-    </script>
-
-    <!-- Flowbite -->
-    <link href="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.css" rel="stylesheet">
-
-    <style>
-        #grid-container {
-            min-height: 400px;
-            background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
-            border: 2px dashed #86efac;
-            border-radius: 12px;
-            padding: 16px;
-            transition: all 0.3s ease;
-            position: relative;
-        }
-
-        .grid-item {
-            background: linear-gradient(135deg, #028f00 0%, #027200 100%);
-            color: white;
-            padding: 20px 16px;
-            text-align: center;
-            font-weight: 600;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px -1px rgba(2, 143, 0, 0.2);
-            min-height: 60px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .grid-item:nth-child(odd) {
-            background: linear-gradient(135deg, #027200 0%, #015500 100%);
-        }
-
-        .grid-item:nth-child(3n) {
-            background: linear-gradient(135deg, #015500 0%, #013800 100%);
-        }
-
-        .grid-item.selected {
-            outline: 3px solid #fbbf24;
-            outline-offset: 2px;
-        }
-
-        .code-block {
-            background: #1e293b;
-            color: #e2e8f0;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 13px;
-            line-height: 1.6;
-            padding: 16px;
-            border-radius: 8px;
-            overflow-x: auto;
-            white-space: pre-wrap;
-        }
-
-        .code-block .property {
-            color: #7dd3fc;
-        }
-
-        .code-block .value {
-            color: #fde047;
-        }
-
-        .code-block .selector {
-            color: #f472b6;
-        }
-
-        .code-block .tag {
-            color: #f472b6;
-        }
-
-        .code-block .attr {
-            color: #7dd3fc;
-        }
-
-        .code-block .string {
-            color: #86efac;
-        }
-    </style>
+    <!-- Compiled Tailwind + Flowbite + Custom Styles -->
+    <link rel="stylesheet" href="../assets/css/main.css">
 </head>
 
 <body class="bg-gray-50 min-h-screen">
@@ -129,8 +32,8 @@
                 </div>
 
                 <div class="flex items-center gap-4">
-                    <a href="../flexbox/flex.html" class="text-gray-600 hover:text-primary-600 font-medium transition-colors">Flexbox Tester</a>
-                    <a href="grid.html" class="text-primary-600 font-medium">Grid Tester</a>
+                    <a href="../flexbox/flex.html" class="text-gray-600 hover:text-primary-600 font-medium transition-colors" data-i18n="nav.flexbox">Flexbox Tester</a>
+                    <a href="grid.html" class="text-primary-600 font-medium" data-i18n="nav.grid">Grid Tester</a>
 
                     <!-- Language Dropdown -->
                     <button id="lang-dropdown-btn" data-dropdown-toggle="lang-dropdown" class="flex items-center gap-2 px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100 rounded-lg transition-colors">
@@ -158,7 +61,7 @@
         <div class="grid grid-cols-1 xl:grid-cols-[300px_1fr_280px] gap-6">
             <!-- Left Column: Parent Properties -->
             <aside class="bg-white rounded-xl shadow-sm border border-gray-200 p-5 h-fit max-h-[calc(100vh-120px)] overflow-y-auto">
-                <h2 class="text-lg font-semibold text-gray-900 mb-4 pb-3 border-b border-gray-200">Parent Properties</h2>
+                <h2 class="text-lg font-semibold text-gray-900 mb-4 pb-3 border-b border-gray-200" data-i18n="grid.parent.title">Parent Properties</h2>
 
                 <!-- display -->
                 <div class="mb-4">
@@ -328,7 +231,7 @@
             <!-- Middle Column: Preview -->
             <section class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
                 <div class="flex items-center justify-between mb-4">
-                    <h2 class="text-lg font-semibold text-gray-900">Grid Container Preview</h2>
+                    <h2 class="text-lg font-semibold text-gray-900" data-i18n="grid.preview.title">Grid Container Preview</h2>
                 </div>
 
                 <div id="grid-container">
@@ -341,13 +244,13 @@
                 </div>
 
                 <div class="flex items-center justify-center gap-3 mt-4">
-                    <button id="add-item" class="px-4 py-2 bg-primary-600 hover:bg-primary-700 text-white font-medium rounded-lg transition-colors">Add Item</button>
-                    <button id="remove-item" class="px-4 py-2 bg-gray-200 hover:bg-gray-300 text-gray-700 font-medium rounded-lg transition-colors">Remove Item</button>
+                    <button id="add-item" class="px-4 py-2 bg-primary-600 hover:bg-primary-700 text-white font-medium rounded-lg transition-colors" data-i18n="grid.preview.add_item">Add Item</button>
+                    <button id="remove-item" class="px-4 py-2 bg-gray-200 hover:bg-gray-300 text-gray-700 font-medium rounded-lg transition-colors" data-i18n="grid.preview.remove_item">Remove Item</button>
                 </div>
 
                 <!-- Tips -->
                 <div class="mt-4 p-4 bg-primary-50 border border-primary-200 rounded-lg">
-                    <h4 class="font-medium text-primary-800 mb-2">Tips</h4>
+                    <h4 class="font-medium text-primary-800 mb-2" data-i18n="grid.preview.tips">Tips</h4>
                     <ul class="text-sm text-primary-700 space-y-1">
                         <li><code class="bg-primary-100 px-1 rounded">repeat(3, 1fr)</code> - Three equal columns</li>
                         <li><code class="bg-primary-100 px-1 rounded">1fr 2fr 1fr</code> - Middle column twice as wide</li>
@@ -358,10 +261,10 @@
 
             <!-- Right Column: Child Properties -->
             <aside class="bg-white rounded-xl shadow-sm border border-gray-200 p-5 h-fit">
-                <h2 class="text-lg font-semibold text-gray-900 mb-4 pb-3 border-b border-gray-200">Child Properties</h2>
+                <h2 class="text-lg font-semibold text-gray-900 mb-4 pb-3 border-b border-gray-200" data-i18n="grid.child.title">Child Properties</h2>
 
                 <div class="mb-4">
-                    <label class="block mb-2 text-sm font-medium text-gray-700">Select Item</label>
+                    <label class="block mb-2 text-sm font-medium text-gray-700" data-i18n="grid.child.select_item">Select Item</label>
                     <select id="item-select" class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-primary-500">
                         <option value="item1">Item 1</option>
                         <option value="item2">Item 2</option>
@@ -454,14 +357,14 @@
         <!-- Code Preview -->
         <section class="mt-6 bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
             <div class="flex items-center justify-between px-6 py-4 border-b border-gray-200">
-                <h2 class="text-lg font-semibold text-gray-900">Generated Code</h2>
+                <h2 class="text-lg font-semibold text-gray-900" data-i18n="grid.code.title">Generated Code</h2>
                 <div class="flex gap-2">
-                    <button id="tab-css" class="px-4 py-1.5 text-sm font-medium bg-primary-100 text-primary-700 rounded-lg">CSS</button>
-                    <button id="tab-html" class="px-4 py-1.5 text-sm font-medium text-gray-600 hover:bg-gray-100 rounded-lg">HTML</button>
+                    <button id="tab-css" class="px-4 py-1.5 text-sm font-medium bg-primary-100 text-primary-700 rounded-lg" data-i18n="grid.code.tab_css">CSS</button>
+                    <button id="tab-html" class="px-4 py-1.5 text-sm font-medium text-gray-600 hover:bg-gray-100 rounded-lg" data-i18n="grid.code.tab_html">HTML</button>
                 </div>
             </div>
             <div class="relative">
-                <button id="copy-btn" class="absolute top-4 right-4 px-3 py-1.5 text-xs font-medium text-gray-300 bg-gray-800 hover:bg-gray-700 rounded border border-gray-700 transition-colors">Copy</button>
+                <button id="copy-btn" class="absolute top-4 right-4 px-3 py-1.5 text-xs font-medium text-gray-300 bg-gray-800 hover:bg-gray-700 rounded border border-gray-700 transition-colors" data-i18n="grid.code.copy">Copy</button>
                 <pre id="css-code" class="code-block m-4"></pre>
                 <pre id="html-code" class="code-block m-4 hidden"></pre>
             </div>
@@ -476,12 +379,12 @@
                     <img src="../assets/logo.svg" alt="CSS Layout Tester" class="h-8 w-8 brightness-200">
                     <span class="text-white font-semibold">CSS Layout Tester</span>
                 </div>
-                <p class="text-sm">Made with ❤️ for COS10026 @ Swinburne</p>
+                <p class="text-sm" data-i18n="common.footer">Made with ❤️ for COS10026 @ Swinburne</p>
                 <a href="https://github.com/Arziel1992/css-layout-tester" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-sm text-gray-400 hover:text-white transition-colors">
                     <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
                         <path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd" />
                     </svg>
-                    <span>View on GitHub</span>
+                    <span data-i18n="common.view_on_github">View on GitHub</span>
                 </a>
             </div>
         </div>
@@ -527,11 +430,34 @@
             'order': { title: 'order', content: '<p>Controls the order of grid items. Default is 0. Items with lower values appear first.</p>' }
         };
 
+        // i18n - Initialize early so translations are available for openModal and updateCodePreview
+        let currentLocale = localStorage.getItem('locale') || 'en';
+        let translations = {};
+
+        function getTranslation(key) {
+            const keys = key.split('.');
+            let value = translations;
+            for (const k of keys) {
+                if (value && typeof value === 'object' && k in value) {
+                    value = value[k];
+                } else {
+                    return key;
+                }
+            }
+            return value;
+        }
+
         window.openModal = function (property) {
             const info = propertyInfo[property];
             if (info) {
-                document.getElementById('modal-title').textContent = info.title;
-                document.getElementById('modal-content').innerHTML = info.content;
+                // Try to get translation from JSON
+                const jsonKey = property.replace(/-/g, '_');
+                const transTitle = getTranslation(`grid.parent.${jsonKey}`) || getTranslation(`grid.child.${jsonKey}`);
+                const transDesc = getTranslation(`grid.parent.${jsonKey}_desc`) || getTranslation(`grid.child.${jsonKey}_desc`);
+
+                document.getElementById('modal-title').textContent = (transTitle && transTitle !== `grid.parent.${jsonKey}` && transTitle !== `grid.child.${jsonKey}`) ? transTitle : info.title;
+                document.getElementById('modal-content').innerHTML = (transDesc && transDesc !== `grid.parent.${jsonKey}_desc` && transDesc !== `grid.child.${jsonKey}_desc`) ? transDesc : info.content;
+
                 document.getElementById('info-modal').classList.remove('hidden');
                 document.getElementById('info-modal').classList.add('flex');
                 document.getElementById('modal-backdrop').classList.remove('hidden');
@@ -634,7 +560,8 @@
 
             const items = document.querySelectorAll('.grid-item');
             let html = `<div class="container">\n`;
-            items.forEach((item, i) => { html += `  <div class="item" id="item${i + 1}">Item ${i + 1}</div>\n`; });
+            const itemLabel = getTranslation('grid.preview.item') || 'Item';
+            items.forEach((item, i) => { html += `  <div class="item" id="item${i + 1}">${itemLabel} ${i + 1}</div>\n`; });
             html += `</div>`;
             const highlightedHtml = html.replace(/(<\/?[a-z]+)/gi, '<span class="tag">$1</span>').replace(/(class|id)=/g, '<span class="attr">$1</span>=').replace(/"([^"]+)"/g, '"<span class="string">$1</span>"');
             htmlCodeEl.innerHTML = highlightedHtml;
@@ -643,12 +570,13 @@
         document.getElementById('add-item').addEventListener('click', () => {
             const items = document.querySelectorAll('.grid-item');
             const newNum = items.length + 1;
+            const itemLabel = getTranslation('grid.preview.item') || 'Item';
             const newItem = document.createElement('div');
             newItem.className = 'grid-item';
             newItem.id = `item${newNum}`;
-            newItem.textContent = `Item ${newNum}`;
+            newItem.textContent = `${itemLabel} ${newNum}`;
             gridContainer.appendChild(newItem);
-            itemSelect.appendChild(new Option(`Item ${newNum}`, `item${newNum}`));
+            itemSelect.appendChild(new Option(`${itemLabel} ${newNum}`, `item${newNum}`));
             updateCodePreview();
         });
 
@@ -704,9 +632,40 @@
         loadChildProperties();
         updateCodePreview();
 
-        let currentLocale = localStorage.getItem('locale') || 'en';
+        // i18n - applyTranslations and loadTranslations
+        function applyTranslations() {
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                const translation = getTranslation(key);
+                if (translation !== key) el.textContent = translation;
+            });
+        }
+
         async function loadTranslations(locale) {
-            try { await fetch(`../locales/${locale}.json`); document.getElementById('current-lang').textContent = locale.toUpperCase(); } catch (e) { }
+            try {
+                // Robust project root calculation (one level up from grid/)
+                const getProjectRoot = () => {
+                    const path = window.location.pathname;
+                    const base = path.substring(0, path.lastIndexOf('/grid/'));
+                    return base.endsWith('/') ? base : base + '/';
+                };
+                const root = getProjectRoot();
+                const response = await fetch(`${root}locales/${locale}.json`);
+                translations = await response.json();
+                document.getElementById('current-lang').textContent = locale.toUpperCase();
+                applyTranslations();
+
+                // Update item labels in select and preview
+                const itemLabel = getTranslation('grid.preview.item') || 'Item';
+                document.querySelectorAll('.grid-item').forEach((item, i) => {
+                    item.textContent = `${itemLabel} ${i + 1}`;
+                });
+                Array.from(itemSelect.options).forEach((option, i) => {
+                    option.textContent = `${itemLabel} ${i + 1}`;
+                });
+
+                updateCodePreview();
+            } catch (e) { console.error('Failed to load translations:', e); }
         }
         window.setLanguage = function (locale) { currentLocale = locale; localStorage.setItem('locale', locale); loadTranslations(locale); };
         loadTranslations(currentLocale);

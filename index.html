@@ -21,38 +21,15 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
-    <!-- Tailwind v4 CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Compiled Tailwind + Flowbite + Custom Styles -->
+    <link rel="stylesheet" href="assets/css/main.css">
+
     <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        primary: {
-                            50: '#e6f7e6',
-                            100: '#ccefcc',
-                            200: '#99df99',
-                            300: '#66cf66',
-                            400: '#33bf33',
-                            500: '#028f00',
-                            600: '#027200',
-                            700: '#015500',
-                            800: '#013800',
-                            900: '#001b00',
-                            950: '#000e00'
-                        }
-                    },
-                    fontFamily: {
-                        sans: ['Inter', 'system-ui', 'sans-serif'],
-                        mono: ['JetBrains Mono', 'monospace']
-                    }
-                }
-            }
+        // Ensure trailing slash for correct relative path resolution
+        if (!window.location.pathname.endsWith('/') && !window.location.pathname.split('/').pop().includes('.')) {
+            window.location.pathname += '/';
         }
     </script>
-
-    <!-- Flowbite -->
-    <link href="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.css" rel="stylesheet">
 </head>
 
 <body class="bg-gray-50 min-h-screen">
@@ -61,8 +38,10 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16">
                 <div class="flex items-center gap-3">
-                    <img src="assets/logo.svg" alt="CSS Layout Tester" class="h-8 w-8">
-                    <span class="font-semibold text-gray-900 text-lg" data-i18n="app.name">CSS Layout Tester</span>
+                    <a href="index.html" class="flex items-center gap-3">
+                        <img src="assets/logo.svg" alt="CSS Layout Tester" class="h-8 w-8">
+                        <span class="font-semibold text-gray-900 text-lg" data-i18n="app.name">CSS Layout Tester</span>
+                    </a>
                 </div>
 
                 <div class="flex items-center gap-4">
@@ -198,25 +177,25 @@
                                 <svg class="w-5 h-5 text-primary-500" fill="currentColor" viewBox="0 0 20 20">
                                     <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
                                 </svg>
-                                <span>Control parent container properties</span>
+                                <span data-i18n="home.cards.flexbox.features.0">Control parent container properties</span>
                             </li>
                             <li class="flex items-center gap-2 text-gray-700">
                                 <svg class="w-5 h-5 text-primary-500" fill="currentColor" viewBox="0 0 20 20">
                                     <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
                                 </svg>
-                                <span>Modify individual flex items</span>
+                                <span data-i18n="home.cards.flexbox.features.1">Modify individual flex items</span>
                             </li>
                             <li class="flex items-center gap-2 text-gray-700">
                                 <svg class="w-5 h-5 text-primary-500" fill="currentColor" viewBox="0 0 20 20">
                                     <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
                                 </svg>
-                                <span>Real-time CSS code updates</span>
+                                <span data-i18n="home.cards.flexbox.features.2">Real-time CSS code updates</span>
                             </li>
                             <li class="flex items-center gap-2 text-gray-700">
                                 <svg class="w-5 h-5 text-primary-500" fill="currentColor" viewBox="0 0 20 20">
                                     <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
                                 </svg>
-                                <span>Axis visualization toggles</span>
+                                <span data-i18n="home.cards.flexbox.features.3">Axis visualization toggles</span>
                             </li>
                         </ul>
 
@@ -251,26 +230,26 @@
                                 <svg class="w-5 h-5 text-primary-500" fill="currentColor" viewBox="0 0 20 20">
                                     <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
                                 </svg>
-                                <span>Design custom grid templates</span>
+                                <span data-i18n="home.cards.grid.features.0">Design custom grid templates</span>
                             </li>
                             <li class="flex items-center gap-2 text-gray-700">
                                 <svg class="w-5 h-5 text-primary-500" fill="currentColor" viewBox="0 0 20 20">
                                     <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
                                 </svg>
-                                <span>Position grid items precisely</span>
+                                <span data-i18n="home.cards.grid.features.1">Position grid items precisely</span>
                             </li>
                             <li class="flex items-center gap-2 text-gray-700">
                                 <svg class="w-5 h-5 text-primary-500" fill="currentColor" viewBox="0 0 20 20">
                                     <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
                                 </svg>
-                                <span>Subgrid support</span>
-                                <span class="inline-flex items-center px-2 py-0.5 text-xs font-medium bg-amber-100 text-amber-800 rounded-full">New</span>
+                                <span data-i18n="home.cards.grid.features.2">Subgrid support</span>
+                                <span class="inline-flex items-center px-2 py-0.5 text-xs font-medium bg-amber-100 text-amber-800 rounded-full" data-i18n="common.new">New</span>
                             </li>
                             <li class="flex items-center gap-2 text-gray-700">
                                 <svg class="w-5 h-5 text-primary-500" fill="currentColor" viewBox="0 0 20 20">
                                     <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
                                 </svg>
-                                <span>Visual grid line overlay</span>
+                                <span data-i18n="home.cards.grid.features.3">Visual grid line overlay</span>
                             </li>
                         </ul>
 
@@ -294,14 +273,14 @@
                     <img src="assets/logo.svg" alt="CSS Layout Tester" class="h-8 w-8 brightness-200">
                     <span class="text-white font-semibold">CSS Layout Tester</span>
                 </div>
-                <p class="text-sm">Made with ❤️ for COS10026 @ Swinburne</p>
+                <p class="text-sm" data-i18n="common.footer">Made with ❤️ for COS10026 @ Swinburne</p>
                 <a href="https://github.com/Arziel1992/css-layout-tester" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-sm text-gray-400 hover:text-white transition-colors">
                     <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                         <path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd" />
                     </svg>
-                    <span>View on GitHub</span>
+                    <span data-i18n="common.view_on_github">View on GitHub</span>
                 </a>
-                <p class="text-xs text-gray-500">v2026-02-07-2251</p>
+                <p class="text-xs text-gray-500">v2026-02-07-2308</p>
             </div>
         </div>
     </footer>
@@ -316,7 +295,14 @@
 
         async function loadTranslations(locale) {
             try {
-                const response = await fetch(`locales/${locale}.json`);
+                // Robust project root calculation
+                const getProjectRoot = () => {
+                    const path = window.location.pathname;
+                    if (path.endsWith('.html')) return path.substring(0, path.lastIndexOf('/') + 1);
+                    return path.endsWith('/') ? path : path + '/';
+                };
+                const root = getProjectRoot();
+                const response = await fetch(`${root}locales/${locale}.json`);
                 translations = await response.json();
                 applyTranslations();
                 document.getElementById('current-lang').textContent = locale.toUpperCase();

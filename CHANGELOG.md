@@ -2,6 +2,21 @@
 
 All notable changes to CSS Layout Tester will be documented in this file.
 
+## [v2026-02-07-2308] 2026-02-07 - 23:08
+
+### Changed
+
+- **BREAKING**: Replaced Tailwind CDN with production-ready CLI build
+- Enhanced i18n system to dynamically apply translations to DOM elements
+- Added data-i18n attributes to navigation elements for proper Spanish translation
+- Consolidated all styles into src/input.css for centralized theming
+- Removed inline styles from flexbox/flex.html and grid/grid.html
+
+### Added
+
+- `npm run build` compiles Tailwind CSS to assets/css/main.css
+- `npm run watch` for development with hot reload
+
 ## [v2026-02-07-2251] 2026-02-07 - 22:51
 
 ### Changed

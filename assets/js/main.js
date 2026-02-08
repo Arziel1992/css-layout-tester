@@ -8,7 +8,9 @@ let currentLocale = localStorage.getItem('locale') || 'en';
 
 async function loadTranslations(locale) {
     try {
-        await fetch(`../locales/${locale}.json`);
+        // Use path relative to the HTML page location
+        const basePath = new URL('.', document.baseURI).href;
+        await fetch(`${basePath}locales/${locale}.json`);
         const langBtn = document.getElementById('current-lang');
         if (langBtn) {
             langBtn.textContent = locale.toUpperCase();

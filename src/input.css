@@ -121,3 +121,115 @@ body {
 .lang-toggle {
     @apply flex items-center gap-2 px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100 rounded-lg transition-colors;
 }
+
+/* Flexbox Preview Container */
+#flex-container {
+    min-height: 400px;
+    background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+    border: 2px dashed #86efac;
+    border-radius: 12px;
+    padding: 16px;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.flex-item {
+    background: linear-gradient(135deg, #028f00 0%, #027200 100%);
+    color: white;
+    padding: 20px 24px;
+    text-align: center;
+    font-weight: 600;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px -1px rgba(2, 143, 0, 0.2);
+    transition: all 0.2s ease;
+    min-width: 80px;
+}
+
+.flex-item:nth-child(odd) {
+    background: linear-gradient(135deg, #027200 0%, #015500 100%);
+}
+
+.flex-item:nth-child(3n) {
+    background: linear-gradient(135deg, #015500 0%, #013800 100%);
+}
+
+.flex-item.selected {
+    outline: 3px solid #fbbf24;
+    outline-offset: 2px;
+}
+
+/* Grid Preview Container */
+#grid-container {
+    min-height: 400px;
+    background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+    border: 2px dashed #86efac;
+    border-radius: 12px;
+    padding: 16px;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.grid-item {
+    background: linear-gradient(135deg, #028f00 0%, #027200 100%);
+    color: white;
+    padding: 16px;
+    text-align: center;
+    font-weight: 600;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px -1px rgba(2, 143, 0, 0.2);
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 60px;
+}
+
+.grid-item:nth-child(odd) {
+    background: linear-gradient(135deg, #027200 0%, #015500 100%);
+}
+
+.grid-item:nth-child(3n) {
+    background: linear-gradient(135deg, #015500 0%, #013800 100%);
+}
+
+.grid-item.selected {
+    outline: 3px solid #fbbf24;
+    outline-offset: 2px;
+}
+
+/* Code block syntax highlighting */
+.code-block {
+    background: #1e293b;
+    color: #e2e8f0;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    line-height: 1.6;
+    padding: 16px;
+    border-radius: 8px;
+    overflow-x: auto;
+    white-space: pre-wrap;
+}
+
+.code-block .property {
+    color: #7dd3fc;
+}
+
+.code-block .value {
+    color: #fde047;
+}
+
+.code-block .selector {
+    color: #f472b6;
+}
+
+.code-block .tag {
+    color: #f472b6;
+}
+
+.code-block .attr {
+    color: #7dd3fc;
+}
+
+.code-block .string {
+    color: #86efac;
+}
